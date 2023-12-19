@@ -37,22 +37,6 @@ $gradient: linear-gradient(95deg, #6ecbf5 9.57%, #c252e1 79.58%);
     top: 0;
   }
 
-  .input-box {
-    height: 48px;
-    display: flex;
-    // flex-grow: 1;
-    padding: 0px 0px 0px 24px;
-    align-items: center;
-    flex-shrink: 0;
-    border-radius: 24px;
-    border: 2px solid $blue02;
-
-    input {
-      font-family: "Nunito-R", "NotoKR";
-      font-size: 16px;
-    }
-  }
-
   .sign-nav {
     height: 48px;
     display: inline-flex;
@@ -62,11 +46,52 @@ $gradient: linear-gradient(95deg, #6ecbf5 9.57%, #c252e1 79.58%);
   }
 
   li {
+    display: flex;
     height: 100%;
-    margin: 0, 24px;
-
+    // margin: 0, 24px;
+  justify-content: space-evenly;
     &:hover {
       cursor: pointer;
     }
   }
+}
+
+
+.input-box {
+  height: 48px;
+  display: flex;
+  flex-grow: 0.3;
+  flex-shrink: 0;
+  border-radius: 24px;
+  border: 2px solid $blue02;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    border: 2px solid skyblue;
+  }
+
+  input {
+    width: 80%;
+    font-family: "Nunito-R", "NotoKR";
+    font-size: 16px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+  }
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+  margin-right: 2rem;
+}
+
+.search-img {
+  display: inline-block;
+  width: 10%;
+  height: 40px;
+  background: url(../assets/img/search.svg) 50% no-repeat;
+  cursor: pointer;
 }

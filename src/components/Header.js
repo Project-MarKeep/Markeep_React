@@ -1,38 +1,76 @@
-import React, { useEffect, useState } from "react";
-import serachIcon from "../assets/img/search.svg";
-import "./Header.scss";
-import SignModal from "./SignModal";
+import { AppBar, Box, Button, InputBase, Toolbar } from '@mui/material';
+import React, { useState } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
+import { styled } from '@mui/material/styles';
+import './Header.scss';
+import SignModal from './SignModal';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const Header = () => {
-  const [signInTabOn, setSignInTabOn] = useState(false);
-  const [signUpTabOn, setSignUpTabOn] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [openStatus, setOpenStatus] = useState({ open: false, value: null });
 
-  const handleSignTabClick = (signIn) => {
-    if (signIn) {
-      setSignInTabOn(!signInTabOn);
-      setSignUpTabOn(false);
-    } else {
-      setSignUpTabOn(!signUpTabOn);
-      setSignInTabOn(false);
-    }
+  const handleOpen = (e) => {
+    console.log(e.target.textContent);
+    setOpenStatus({ open: true, value: e.target.textContent });
   };
 
+  const handleClose = () => {
+    setOpenStatus({ open: false, value: null });
+  };
+
+  const StyledLogo = styled(Box)`
+    && {
+      margin: 1rem 2rem;
+      font-family: Nunito-B;
+      font-size: 2rem;
+      background: linear-gradient(90deg, #6ecbf5, #c252e1);
+      -webkit-background-clip: text;
+      color: transparent;
+      flex-grow: 0.1;
+    }
+  `;
+
   return (
-    <>
-      <div className="header">
-        <h2 className="logo">MarKeep</h2>
-        <div className="input-box">
-          <input className="search" placeholder="검색어를 입력하세요." />
-          <img className="icon" alt="Icon" src={serachIcon} />
-        </div>
-        <ul className="sign-nav">
-          <li onClick={() => handleSignTabClick(true)}>Sign In</li>
-          <li onClick={() => handleSignTabClick(false)}>Sign Up</li>
-        </ul>
-      </div>
-      {signInTabOn && <SignModal>signIn</SignModal>}
-      {signUpTabOn && <SignModal>signUp</SignModal>}
-    </>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar
+        position='static'
+        color='primary'
+        sx={{ background: '#2a2356', outline: 'none' }}
+      >
+        <Toolbar sx={{ justifyContent: 'flex-start' }}>
+          <StyledLogo>Markeep</StyledLogo>
+          <div className='input-box'>
+            <input
+              type='text'
+              id='search'
+              placeholder='검색어를 입력해 주세요.'
+            />
+            <a className='search-img'></a>
+          </div>
+          <div className='button-group'>
+            <Button
+              size='large'
+              color='inherit'
+              onClick={handleOpen}
+            >
+              Sign In
+            </Button>
+            <Button
+              size='large'
+              color='inherit'
+              onClick={handleOpen}
+            >
+              Sign Up
+            </Button>
+            <SignModal
+              status={openStatus}
+              handleClose={handleClose}
+            />
+          </div>
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 };
 
