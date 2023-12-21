@@ -1,1 +1,46 @@
-@import "./variables";
+@import './variables';
+
+@mixin round-image($size: 1.5rem) {
+  width: $size * 1.5;
+  height: $size * 1.5;
+  border-radius: calc($size * 1.5 / 2);
+}
+
+// 아이콘 사이즈, 배경색, 선색, 테두리(bool), 아이콘 내부 채우기(bool)
+@mixin i-box(
+  $size: 1.5rem,
+  $back: transparent,
+  $stroke: $blue,
+  $round: false,
+  $fill: false,
+  $border: false
+) {
+  width: $size * 1.5;
+  height: $size * 1.5;
+  border-radius: if(round, calc($size * 1.5 / 2), $radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $back;
+  box-sizing: border-box;
+
+  @if $border {
+    border: 0.1rem solid $stroke;
+  }
+}
+
+@mixin icon($size: 1.5rem, $stroke: $blue, $fill: false) {
+  stroke: $stroke;
+  width: $size;
+  height: $size;
+
+  @if $fill {
+    fill: $stroke;
+  }
+  // @content;
+}
+
+@mixin hover($stroke) {
+  stroke: lighten($color: $stroke, $amount: 10);
+  filter: drop-shadow(0px 0px 4px $grad-bp);
+}

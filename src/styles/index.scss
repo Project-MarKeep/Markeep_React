@@ -1,7 +1,24 @@
-@import "./variables";
+@import './variables';
 
 body {
   margin: 0;
   padding: 0;
-  background: $blue;
+  background: linear-gradient(45deg, rgba($dark, 0.8), $dark);
+}
+
+@font-face {
+  font-family: Urbanist-Bold;
+  src: url('../assets/fonts/Urbanist-Bold.woff') format('woff');
+}
+@font-face {
+  font-family: Urbanist-Medium;
+  src: url('../assets/fonts/Urbanist-Medium.woff') format('woff');
+}
+@font-face {
+  font-family: Urbanist-light;
+  src: url('../assets/fonts/Urbanist-Light.woff') format('woff');
+}
+@font-face {
+  font-family: NotoSansKR;
+  src: url('../assets/fonts/NotoSansKR-Light.woff') format('woff');
 }
