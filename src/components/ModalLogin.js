@@ -13,8 +13,13 @@ import {
 import React from 'react';
 import EmailIcon from '@mui/icons-material/Email';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { Link as DomLink } from 'react-router-dom';
 
-const ModalLogin = () => {
+const ModalLogin = ({ setValue }) => {
+  const tabChangeHandler = () => {
+    setValue('signUp');
+  };
+
   return (
     <div className='form-wrap'>
       <form
@@ -119,7 +124,7 @@ const ModalLogin = () => {
           underline='hover'
           sx={{ marginLeft: '15em' }}
         >
-          Forgot Password?
+          <DomLink to='/email'>Forgot Password?</DomLink>
         </Link>
         <Button
           variant='contained'
@@ -135,11 +140,12 @@ const ModalLogin = () => {
           variant='h6'
           align='center'
         >
-          Don't have an account?{' '}
+          Don't have an account?
           <Link
             href='#'
             color={'lightGray'}
             underline='hover'
+            onClick={tabChangeHandler}
           >
             Sign Up Now!
           </Link>

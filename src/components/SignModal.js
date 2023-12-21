@@ -80,7 +80,7 @@ const SignModal = ({ status, handleClose }) => {
           }}
         />
       </Tabs>
-      {value === 'signIn' && <ModalLogin />}
+      {value === 'signIn' && <ModalLogin setValue={setValue} />}
       {value === 'signUp' && <ModalJoin />}
     </Dialog>
   );
