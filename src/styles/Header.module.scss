@@ -1,5 +1,5 @@
-@import "./variables";
-@import "./mixin";
+@import './variables';
+@import './mixin';
 
 .wrapper {
   color: $blue;
@@ -16,7 +16,7 @@
     height: 48px;
     text-align: center;
     font: {
-      family: "Nunito-B";
+      family: 'Urbanist-Bold';
       size: 36px;
     }
 
@@ -42,8 +42,4 @@
       color: $white;
     }
   }
-}
-
-.icon {
-  @include icon-style;
 }

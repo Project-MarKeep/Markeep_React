@@ -1,4 +1,4 @@
-@import "./variables";
+@import './variables';
 
 .wrapper {
   box-sizing: border-box;
@@ -6,19 +6,27 @@
 
   flex: 1 0 auto;
   margin: 1.5rem;
-  overflow-y: scroll;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient($blue, $purple);
+    border-radius: $radius;
+    background-clip: padding-box;
+    border: 5px solid $black;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
 
   .content {
     display: grid;
     grid-gap: 36px;
     grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
     list-style: none;
-
-    .grid {
-    }
-  }
-
-  .icon {
-    stroke: $white;
   }
 }

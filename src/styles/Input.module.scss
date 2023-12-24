@@ -1,4 +1,4 @@
-@import "./variables";
+@import 'variables', 'mixin';
 
 .wrapper {
   border: 0.1rem solid $blue04;
@@ -9,7 +9,7 @@
   height: 40px;
   box-sizing: border-box;
 
-  input[type="text"] {
+  input[type='text'] {
     flex: 1 0 auto;
     margin: 0 1rem;
     background: $black;

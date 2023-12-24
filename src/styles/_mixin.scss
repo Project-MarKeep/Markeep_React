@@ -1,27 +1,23 @@
-@import "./variables";
+@import './variables';
 
-@mixin icon-style {
-  width: 1.5rem;
-  height: 1.5rem;
-  stroke: $blue;
-
-  &:hover {
-    stroke: lighten($color: $purple, $amount: 10);
-    filter: drop-shadow(0px 0px 4px $purple);
-  }
+@mixin round-image($size: 1.5rem) {
+  width: $size * 1.5;
+  height: $size * 1.5;
+  border-radius: calc($size * 1.5 / 2);
 }
 
-@mixin round-image($size) {
-  width: $size;
-  height: $size;
-  border-radius: calc($size/2);
-}
-
-// 아이콘 사이즈, 배경색, 선색, 테두리(bool), 아이콘 내부 채우기(bool)
-@mixin icon($size, $back, $stroke, $border, $fill) {
-  width: $size;
-  height: $size;
-  border-radius: calc($size/2);
+// 아이콘 사이즈, 배경색, 선색, 둥근테두리(bool), 아이콘 내부 채우기(bool), 윤곽선
+@mixin i-box(
+  $size: 1.5rem,
+  $back: transparent,
+  $stroke: $blue,
+  $round: false,
+  $fill: false,
+  $border: false
+) {
+  width: $size * 1.5;
+  height: $size * 1.5;
+  border-radius: if(round, calc($size * 1.5 / 2), $radius);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,14 +27,19 @@
   @if $border {
     border: 0.1rem solid $stroke;
   }
+}
 
-  .icon {
-    stroke: $stroke;
-    width: 60%;
-    height: 60%;
+@mixin icon($size: 1.5rem, $stroke: $blue, $fill: false) {
+  stroke: $stroke;
+  width: $size;
+  height: $size;
 
-    @if $fill {
-      fill: $stroke;
-    }
+  @if $fill {
+    fill: $stroke;
   }
+}
+
+@mixin hover($stroke) {
+  stroke: lighten($color: $stroke, $amount: 10);
+  filter: drop-shadow(0px 0px 4px $grad-bp);
 }
