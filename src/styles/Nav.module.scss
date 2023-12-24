@@ -1,0 +1,15 @@
+@import "./variables";
+@import "./mixin";
+
+.wrapper {
+  .nav_box {
+    margin-top: 8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+}
+
+.icon {
+  @include icon-style;
+}

@@ -1,38 +1,27 @@
-import React, { useEffect, useState } from "react";
-import serachIcon from "../assets/img/search.svg";
-import "./Header.scss";
-import SignModal from "./SignModal";
+import React from "react";
+import styles from "../styles/Header.module.scss";
+import Input from "./Input";
+import { ReactComponent as SearchIcon } from "../assets/icons/search.svg";
+import title from "../assets/icons/title.png";
 
 const Header = () => {
-  const [signInTabOn, setSignInTabOn] = useState(false);
-  const [signUpTabOn, setSignUpTabOn] = useState(false);
-
-  const handleSignTabClick = (signIn) => {
-    if (signIn) {
-      setSignInTabOn(!signInTabOn);
-      setSignUpTabOn(false);
-    } else {
-      setSignUpTabOn(!signUpTabOn);
-      setSignInTabOn(false);
-    }
-  };
-
   return (
-    <>
-      <div className="header">
-        <h2 className="logo">MarKeep</h2>
-        <div className="input-box">
-          <input className="search" placeholder="검색어를 입력하세요." />
-          <img className="icon" alt="Icon" src={serachIcon} />
-        </div>
-        <ul className="sign-nav">
-          <li onClick={() => handleSignTabClick(true)}>Sign In</li>
-          <li onClick={() => handleSignTabClick(false)}>Sign Up</li>
-        </ul>
+    <div className={styles.wrapper}>
+      <div className={styles.title}>
+        {/* <img src={title} alt="타이틀" /> */}
+        MarKeep
       </div>
-      {signInTabOn && <SignModal>signIn</SignModal>}
-      {signUpTabOn && <SignModal>signUp</SignModal>}
-    </>
+      <div className={styles.search}>
+        <Input>
+          <div></div>
+          <SearchIcon className={styles.icon} />
+        </Input>
+      </div>
+      <div className={styles.sign_box}>
+        <button className={styles.button}>Sign In</button>
+        <button className={styles.button}>Sign Up</button>
+      </div>
+    </div>
   );
 };
 

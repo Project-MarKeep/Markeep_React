@@ -1,0 +1,44 @@
+@import "./variables";
+
+@mixin icon-style {
+  width: 1.5rem;
+  height: 1.5rem;
+  stroke: $blue;
+
+  &:hover {
+    stroke: lighten($color: $purple, $amount: 10);
+    filter: drop-shadow(0px 0px 4px $purple);
+  }
+}
+
+@mixin round-image($size) {
+  width: $size;
+  height: $size;
+  border-radius: calc($size/2);
+}
+
+// 아이콘 사이즈, 배경색, 선색, 테두리(bool), 아이콘 내부 채우기(bool)
+@mixin icon($size, $back, $stroke, $border, $fill) {
+  width: $size;
+  height: $size;
+  border-radius: calc($size/2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $back;
+  box-sizing: border-box;
+
+  @if $border {
+    border: 0.1rem solid $stroke;
+  }
+
+  .icon {
+    stroke: $stroke;
+    width: 60%;
+    height: 60%;
+
+    @if $fill {
+      fill: $stroke;
+    }
+  }
+}

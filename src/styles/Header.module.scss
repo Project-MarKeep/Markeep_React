@@ -1,0 +1,49 @@
+@import "./variables";
+@import "./mixin";
+
+.wrapper {
+  color: $blue;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 72px;
+  padding: 0 5rem;
+  gap: 16rem;
+
+  .title {
+    margin: 0;
+    width: 148px;
+    height: 48px;
+    text-align: center;
+    font: {
+      family: "Nunito-B";
+      size: 36px;
+    }
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background: linear-gradient(90deg, $cyan, $purple);
+    background-clip: text;
+    color: transparent;
+
+    text-shadow: 0px 0px 4px $blue;
+    mix-blend-mode: lighten;
+    top: 0;
+  }
+
+  .search {
+    flex: 1 0 auto;
+  }
+
+  .sign_box {
+    .button {
+      border: 0;
+      background: $black;
+      color: $white;
+    }
+  }
+}
+
+.icon {
+  @include icon-style;
+}

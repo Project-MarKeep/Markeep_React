@@ -1,29 +1,27 @@
 import React, { useContext, useEffect } from 'react';
-import { API_BASE_URL, USER } from '../../config/host-config';
 import AuthContext from '../../utils/AuthContext';
+import { API_BASE_URL, USER } from '../../config/host-config';
 import { useNavigate } from 'react-router-dom';
 
-const NaverLogin = () => {
+const KakaoLogin = () => {
   const code = new URL(window.location.href).searchParams.get('code');
-  console.log(code);
   const { onLogin } = useContext(AuthContext);
   const redirection = useNavigate();
-  const API_REQUEST_URL = API_BASE_URL + USER + '/naver-login?code=' + code;
-  console.log(API_REQUEST_URL);
+  const API_REQUEST_URL = API_BASE_URL + USER + '/kakao-login?code=' + code;
 
   useEffect(() => {
-    const naverLogin = async () => {
+    const kakaoLogin = async () => {
       console.log('요청!!!');
       const res = await fetch(API_REQUEST_URL);
 
       const { token, nickName, email } = await res.json();
       onLogin(token, nickName, email);
     };
-    naverLogin();
-    redirection('/');
+    kakaoLogin();
+    // redirection('/');
   }, []);
 
-  return <div>NaverLogin</div>;
+  return <div>KakaoLogin</div>;
 };
 
-export default NaverLogin;
+export default KakaoLogin;

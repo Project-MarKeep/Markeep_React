@@ -1,0 +1,67 @@
+@import "./mixin";
+@import "./variables";
+
+.wrap {
+  box-sizing: border-box;
+
+  width: 100%;
+
+  .img_box {
+    width: 100%;
+    height: min-content;
+    position: relative;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    border-radius: $radius;
+
+    &:hover {
+      .hover {
+        display: flex;
+      }
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+
+    .hover {
+      box-sizing: border-box;
+      width: 100%;
+      z-index: 2;
+      padding: 3rem 0.5rem 1rem;
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      position: absolute;
+      bottom: 0;
+      background: linear-gradient(to top, rgba($black, 0.8), rgba($black, 0));
+    }
+
+    .icon_box {
+      @include icon(2.4rem, $white, $black, false, false);
+    }
+  }
+
+  .writer_bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    $size: 1.2rem;
+
+    .icon_box {
+      @include icon($size, "", $white, true, true);
+    }
+
+    .group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      img {
+        @include round-image($size);
+      }
+    }
+  }
+}
