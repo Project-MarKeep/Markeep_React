@@ -11,7 +11,6 @@ const Community = () => {
 
   const pageNo = 1;
   const size = 10;
-  const keyWord = "뭐지";
 
   const requestUri = API_BASE_URL + FOLDER;
 
@@ -20,7 +19,7 @@ const Community = () => {
   }, [])
 
   const fetchFolderList = async() => {
-    const res = await fetch(requestUri + "/all?page=" + `${pageNo}` + "&size=" + `${size}` + "&keyWord=" + `${keyWord}`);
+    const res = await fetch(requestUri + "/all?page=" + `${pageNo}` + "&size=" + `${size}` + "&keyWord=" );
 
     console.log(res);
     const {list} = await res.json();

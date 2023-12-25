@@ -34,7 +34,7 @@ function App() {
               element={<MyPage />}
             />
             <Route
-              path='/search/:keyword'
+              path='/search/:keyWord'
               element={<Search />}
             />
             <Route
