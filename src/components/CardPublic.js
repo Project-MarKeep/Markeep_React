@@ -4,25 +4,24 @@ import { ReactComponent as BookmarkIcon } from '../assets/icons/bookmark.svg';
 import { ReactComponent as PinViewIcon } from '../assets/icons/pin.svg';
 
 const CardPublic = ({
-  image,
-  profileImg,
+  data,
   isMarked,
-  title,
-  writer,
   isFollowed,
   pin,
   bookmarkClickHandler,
   followClickHandler,
 }) => {
+
+  console.log(data);
   return (
     <div className={styles.wrap}>
       <div className={styles.img_box}>
         <img
-          src={image}
+          src={data.folderImg || require("../assets/icons/defaultFolderImg.jpg")}
           alt='폴더 이미지'
         />
         <div className={styles.hover}>
-          <span>{title}</span>
+          <span>{data.title}</span>
           <div
             className={styles.icon_box}
             onClick={bookmarkClickHandler}
@@ -36,10 +35,10 @@ const CardPublic = ({
       <div className={styles.writer_bar}>
         <div className={styles.group}>
           <img
-            src={profileImg}
+            src={data.profileImage || require("../assets/icons/defaultProfileImg.jpg")}
             alt='프로필 사진'
           />
-          <span>{writer}</span>
+          <span>{data.nickname}</span>
           <button
             className={isFollowed && styles.followed}
             onClick={followClickHandler}
