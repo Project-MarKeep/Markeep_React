@@ -6,6 +6,36 @@
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
+    position: relative;
+
+    .menu {
+      margin: 0;
+      padding: 0;
+      position: relative;
+
+      .title {
+        display: none;
+        position: absolute;
+        top: 0.5rem;
+        left: 3rem;
+        width: max-content;
+        background: $blue;
+        color: $dark;
+        font-family: Noto-M;
+        border-radius: 4px;
+
+        font-size: 14px;
+        z-index: 3;
+        padding: 2px 4px;
+      }
+
+      &:hover {
+        transition: 1s;
+        .title {
+          display: block;
+        }
+      }
+    }
   }
 }
 
@@ -13,8 +43,9 @@
   @include i-box();
 
   .icon {
-    width: 1.5rem;
-    height: 1.5rem;
-    stroke: $blue;
+    @include icon();
+    &:hover {
+      @include hover();
+    }
   }
 }

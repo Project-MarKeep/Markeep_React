@@ -1,5 +1,4 @@
-@import './variables';
-@import './mixin';
+@import 'variables', 'mixin';
 
 .wrapper {
   color: $blue;
@@ -8,7 +7,7 @@
   align-items: center;
   height: 72px;
   padding: 0 5rem;
-  gap: 16rem;
+  gap: 4rem;
 
   .title {
     margin: 0;
@@ -16,30 +15,59 @@
     height: 48px;
     text-align: center;
     font: {
-      family: 'Urbanist-Bold';
+      family: Urban-b;
       size: 36px;
     }
 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background: linear-gradient(90deg, $cyan, $purple);
+    background: linear-gradient(135deg, $blue, $purple);
     background-clip: text;
     color: transparent;
 
-    text-shadow: 0px 0px 4px $blue;
+    // text-shadow: 0px 0px 4px $blue;
     mix-blend-mode: lighten;
-    top: 0;
+
+    &:hover {
+      @include hover();
+    }
   }
 
   .search {
+    max-width: 24rem;
     flex: 1 0 auto;
+    position: relative;
+    box-sizing: border-box;
+
+    .icon_box {
+      position: absolute;
+      right: 4px;
+      top: 3px;
+      @include i-box();
+      cursor: pointer;
+    }
+
+    .icon {
+      @include icon();
+
+      &:hover {
+        @include hover();
+      }
+    }
   }
 
   .sign_box {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
     .button {
-      border: 0;
-      background: $black;
-      color: $white;
+      @include btn($color: $blue04, $font: b, $size: 18px);
+
+      &:hover {
+        color: $blue;
+        @include hover();
+      }
     }
   }
 }

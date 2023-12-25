@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Community from './pages/Community';
@@ -6,42 +6,63 @@ import MyPage from './pages/MyPage';
 import Search from './pages/Search';
 import Detail from './pages/Detail';
 import './styles/App.scss';
+import { NavLayout } from './components/NavLayout';
+import FolderList from './components/FolderList';
+import Add from './components/Add';
+import UserInfo from './components/UserInfo';
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className='app'>
-        <div className='nav'>
-          <Nav />
+    <div className='app'>
+      <div className='nav'>
+        <Nav />
+      </div>
+      <div className='nav-modal'></div>
+      <div className='main-wrapper'>
+        <div className='header'>
+          <Header />
         </div>
-        <div className='main-wrapper'>
-          <div className='header'>
-            <Header />
-          </div>
-          <div className='content-wrapper'>
-            <Routes>
+        <div className='content-wrapper'>
+          <Routes>
+            <Route
+              exact
+              path='/'
+              element={<Community />}
+            />
+            <Route
+              path='/mypage'
+              element={<MyPage />}
+            />
+            <Route
+              path='/search/:keyword'
+              element={<Search />}
+            />
+            <Route
+              path='/detail'
+              element={<Detail />}
+            />
+            <Route element={<NavLayout />}>
               <Route
-                exact
-                path='/'
-                element={<Community />}
+                path='/find'
+                element={<FolderList />}
               />
               <Route
-                path='/mypage'
-                element={<MyPage />}
+                path='/add'
+                element={<Add />}
               />
               <Route
-                path='/search'
-                element={<Search />}
+                path='/folders'
+                element={<FolderList />}
               />
               <Route
-                path='/detail'
-                element={<Detail />}
+                path='/user'
+                element={<UserInfo />}
               />
-            </Routes>
-          </div>
+            </Route>
+          </Routes>
         </div>
       </div>
-    </BrowserRouter>
+    </div>
   );
 }
 

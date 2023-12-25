@@ -1,5 +1,4 @@
-@import './mixin';
-@import './variables';
+@import 'variables', 'mixin';
 
 .wrap {
   box-sizing: border-box;
@@ -34,7 +33,7 @@
       display: none;
       justify-content: space-between;
       align-items: center;
-      font-family: NotoSansKR;
+      font-family: Noto-m;
       font-size: 16px;
       color: $white;
       position: absolute;
@@ -44,6 +43,11 @@
       .icon_box {
         $b: $white;
         cursor: pointer;
+        z-index: 3;
+
+        &:hover {
+          filter: contrast(1.2);
+        }
 
         @include i-box($back: $b, $round: true);
 
@@ -64,7 +68,7 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 0.5rem;
-    font-family: 'Urbanist-medium';
+    font-family: Urban-m;
     font-size: 14px;
     color: $blue04;
     height: 1rem;
@@ -95,14 +99,7 @@
     }
 
     button {
-      background: $blue04;
-      border: none;
-      border-radius: $radius;
-      font-family: 'Urbanist-medium';
-      font-size: 14px;
-      color: $black;
-      cursor: pointer;
-      box-sizing: border-box;
+      @include btn($blue04, 14px, $black);
 
       &.followed {
         background: $grad-bp;
