@@ -6,13 +6,17 @@ import { ReactComponent as FolderIcon } from '../assets/icons/folder.svg';
 import { ReactComponent as UserIcon } from '../assets/icons/user.svg';
 import { Link } from 'react-router-dom';
 import styles from '../styles/Nav.module.scss';
+import SearchFolder from './SearchFolder';
+import Add from './Add';
+import FolderList from './FolderList';
+import UserInfo from './UserInfo';
 
 const Nav = () => {
   const menus = [
     {
       title: '내 폴더 검색',
       icon: <SearchIcon className={styles.icon} />,
-      link: '/find',
+      content: <SearchFolder />,
     },
     {
       title: '마이 페이지',
@@ -22,17 +26,17 @@ const Nav = () => {
     {
       title: '북마크 추가',
       icon: <PlusIcon className={styles.icon} />,
-      link: '/add',
+      content: <Add />,
     },
     {
       title: '내 폴더 목록',
       icon: <FolderIcon className={styles.icon} />,
-      link: '/folders',
+      content: <FolderList />,
     },
     {
       title: '내 정보',
       icon: <UserIcon className={styles.icon} />,
-      link: '/user',
+      content: <UserInfo />,
     },
   ];
   return (
@@ -44,13 +48,23 @@ const Nav = () => {
               className={styles.menu}
               key={idx}
             >
-              <Link
-                to={menu.link}
-                className={styles.icon_box}
-              >
-                {menu.icon}
-              </Link>
+              {menu.link ? (
+                <Link
+                  to={menu.link}
+                  className={styles.icon_box}
+                >
+                  {menu.icon}
+                </Link>
+              ) : (
+                <div
+                  to={menu.link}
+                  className={styles.icon_box}
+                >
+                  {menu.icon}
+                </div>
+              )}
               <div className={styles.title}>{menu.title}</div>
+              {!menu.link && <div className={styles.modal}>{menu.content}</div>}
             </div>
           );
         })}

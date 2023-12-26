@@ -1,4 +1,4 @@
-@import './variables';
+@import "./variables";
 
 @mixin round-image($size: 1.5rem) {
   width: $size * 1.5;
@@ -48,9 +48,26 @@
   background: $bg;
   border: none;
   border-radius: $radius;
-  font-family: 'Urban-' + $font;
+  font-family: "Urban-" + $font;
   font-size: $size;
   color: $color;
   cursor: pointer;
   box-sizing: border-box;
+}
+
+@mixin scroll($c1: $blue, $c2: $purple) {
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient($c1, $c2);
+    border-radius: $radius;
+    background-clip: padding-box;
+    border: 5px solid transparent;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
 }

@@ -1,0 +1,38 @@
+@import "variables", "mixin";
+
+h2 {
+  font-family: Noto-b;
+  font-size: 14px;
+  margin: 4px;
+}
+
+.list {
+  max-height: 12rem;
+  overflow-y: auto;
+  @include scroll($salmon, $purple);
+
+  ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem 0;
+    gap: 0.1rem;
+
+    li {
+      display: block;
+      margin: 0 4px;
+      white-space: nowrap;
+      height: 1.2rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.2rem;
+      text-align: center;
+    }
+
+    a {
+      text-decoration: none;
+      color: $dark;
+    }
+  }
+}

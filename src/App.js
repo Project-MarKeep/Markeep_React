@@ -6,10 +6,6 @@ import MyPage from './pages/MyPage';
 import Search from './pages/Search';
 import Detail from './pages/Detail';
 import './styles/App.scss';
-import { NavLayout } from './components/NavLayout';
-import FolderList from './components/FolderList';
-import Add from './components/Add';
-import UserInfo from './components/UserInfo';
 
 function App() {
   return (
@@ -38,27 +34,9 @@ function App() {
               element={<Search />}
             />
             <Route
-              path='/detail'
+              path='/detail/:folderId'
               element={<Detail />}
             />
-            <Route element={<NavLayout />}>
-              <Route
-                path='/find'
-                element={<FolderList />}
-              />
-              <Route
-                path='/add'
-                element={<Add />}
-              />
-              <Route
-                path='/folders'
-                element={<FolderList />}
-              />
-              <Route
-                path='/user'
-                element={<UserInfo />}
-              />
-            </Route>
           </Routes>
         </div>
       </div>
