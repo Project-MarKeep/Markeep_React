@@ -75,8 +75,8 @@ const SearchFolder = () => {
       </div>
       <div className={styles.list}>
         <ul>
-          {list.map((data) => (
-            <li>
+          {list.map((data, idx) => (
+            <li key={idx}>
               <Link to={`/detail/${data.id}`}>{data.title}</Link>
             </li>
           ))}
