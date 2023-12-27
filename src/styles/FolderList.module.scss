@@ -1,7 +1,7 @@
-@import "variables", "mixin";
+@import 'variables', 'mixin';
 
-h2 {
-  font-family: Noto-b;
+.title {
+  color: $white;
   font-size: 14px;
   margin: 4px;
 }
@@ -28,11 +28,17 @@ h2 {
       text-overflow: ellipsis;
       line-height: 1.2rem;
       text-align: center;
+      &:hover {
+        color: $white;
+      }
     }
 
     a {
       text-decoration: none;
-      color: $dark;
+      color: $blue04;
+      &:hover {
+        color: $white;
+      }
     }
   }
 }
