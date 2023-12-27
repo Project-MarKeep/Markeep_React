@@ -16,19 +16,24 @@ const Community = () => {
 
   useEffect(() => {
     fetchFolderList();
-  }, [])
+  }, []);
 
-  const fetchFolderList = async() => {
-    const res = await fetch(requestUri + "/all?page=" + `${pageNo}` + "&size=" + `${size}` + "&keyWord=" );
+  const fetchFolderList = async () => {
+    const res = await fetch(
+      requestUri +
+        '/all?page=' +
+        `${pageNo}` +
+        '&size=' +
+        `${size}` +
+        '&keyWord='
+    );
 
     console.log(res);
-    const {list} = await res.json();
-     // 응답데이터에 핀 수 추가 요망.
+    const { list } = await res.json();
+    // 응답데이터에 핀 수 추가 요망.
 
-     setList(list);
-  }
-
-
+    setList(list);
+  };
 
   // 폴더리스트 불러와서 map함수 써서 CardPublic 안에 속성으로 값 넣어주시면 돼요.
   // CardPublic에 값 넣는 예시는 아래 return문쪽에 CardPublic 컴포넌트 보시면 돼요!
@@ -52,9 +57,9 @@ const Community = () => {
       <div className={styles.content}>
         {/* 커뮤니티 북마크 폴더 불러와서 여기에 넣으면 돼요.
         아래 CardPublic은 예시로 넣어놓은 거니까 삭제하세요. */}
-        {list.map((data) => (
+        {list.map((data, idx) => (
           <CardPublic
-            key={data.id}
+            key={idx}
             data={data}
             isMarked={td.isMarked}
             isFollowed={td.isFollowed}

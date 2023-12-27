@@ -11,13 +11,14 @@ const CardPublic = ({
   bookmarkClickHandler,
   followClickHandler,
 }) => {
-
   console.log(data);
   return (
     <div className={styles.wrap}>
       <div className={styles.img_box}>
         <img
-          src={data.folderImg || require("../assets/icons/defaultFolderImg.jpg")}
+          src={
+            data.folderImg || require('../assets/icons/defaultFolderImg.jpg')
+          }
           alt='폴더 이미지'
         />
         <div className={styles.hover}>
@@ -35,7 +36,10 @@ const CardPublic = ({
       <div className={styles.writer_bar}>
         <div className={styles.group}>
           <img
-            src={data.profileImage || require("../assets/icons/defaultProfileImg.jpg")}
+            src={
+              data.profileImage ||
+              require('../assets/icons/defaultProfileImg.jpg')
+            }
             alt='프로필 사진'
           />
           <span>{data.nickname}</span>
