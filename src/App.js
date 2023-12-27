@@ -6,6 +6,8 @@ import MyPage from "./pages/MyPage";
 import Search from "./pages/Search";
 import Detail from "./pages/Detail";
 import "./styles/App.scss";
+import Folders from "./components/Folders";
+import Finds from "./components/Finds";
 
 function App() {
   return (
@@ -21,7 +23,12 @@ function App() {
         <div className="content-wrapper">
           <Routes>
             <Route exact path="/" element={<Community />} />
-            <Route path="/mypage" element={<MyPage />} />
+            <Route path="/mypage" element={<MyPage />}>
+              <Route path="folders" element={<Folders />}>
+                <Route path=":folderId" element={<Detail />} />
+              </Route>
+              <Route path="finds" element={<Finds />} />
+            </Route>
             <Route path="/search/:keyword" element={<Search />} />
             <Route path="/detail/:folderId" element={<Detail />} />
           </Routes>

@@ -1,11 +1,11 @@
-import React, { useRef, useState } from 'react';
-import { ReactComponent as SearchIcon } from '../assets/icons/search.svg';
-import Input from './Input';
-import styles from '../styles/SearchFolder.module.scss';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useRef, useState } from "react";
+import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg";
+import Input from "../Input";
+import styles from "../../styles/SearchFolder.module.scss";
+import { Link, useNavigate } from "react-router-dom";
 
 const SearchFolder = () => {
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState("");
   const inputRef = useRef();
 
   const getSearchData = (e) => {
@@ -13,7 +13,7 @@ const SearchFolder = () => {
   };
 
   const keyDownHandler = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       clickSearchHandler();
       inputRef.current.blur();
     }
@@ -29,17 +29,14 @@ const SearchFolder = () => {
       <div className={styles.search}>
         <Input>
           <input
-            type='text'
-            placeholder='내 폴더 검색'
+            type="text"
+            placeholder="내 폴더 검색"
             value={searchInput}
             onChange={getSearchData}
             onKeyDown={keyDownHandler}
             ref={inputRef}
           />
-          <div
-            className={styles.icon_box}
-            onClick={clickSearchHandler}
-          >
+          <div className={styles.icon_box} onClick={clickSearchHandler}>
             <SearchIcon className={styles.icon} />
           </div>
         </Input>
