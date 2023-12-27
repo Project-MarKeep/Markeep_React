@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './SignModal.scss';
-import SnsLogin from './login/SnsLogin';
 import {
   Dialog,
   Tabs,
@@ -80,7 +79,7 @@ const SignModal = ({ status, handleClose }) => {
           }}
         />
       </Tabs>
-      {value === 'signIn' && <ModalLogin setValue={setValue} />}
+      {value === 'signIn' && <ModalLogin />}
       {value === 'signUp' && <ModalJoin />}
     </Dialog>
   );

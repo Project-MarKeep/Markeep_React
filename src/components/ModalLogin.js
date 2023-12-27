@@ -124,7 +124,7 @@ const ModalLogin = ({ setValue }) => {
           underline='hover'
           sx={{ marginLeft: '15em' }}
         >
-          <DomLink to='/email'>Forgot Password?</DomLink>
+          Forgot Password?
         </Link>
         <Button
           variant='contained'

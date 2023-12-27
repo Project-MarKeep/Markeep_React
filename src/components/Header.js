@@ -3,11 +3,14 @@ import styles from '../styles/Header.module.scss';
 import Input from './Input';
 import { ReactComponent as SearchIcon } from '../assets/icons/search.svg';
 import { Link, useNavigate } from 'react-router-dom';
+import SignModal from './SignModal';
 
 const Header = () => {
   const [searchInput, setSearchInput] = useState('');
   const navigate = useNavigate();
   const inputRef = useRef();
+  const [open, setOpen] = useState(false);
+  const [openStatus, setOpenStatus] = useState({ open: false, value: null });
 
   const getSearchData = (e) => {
     setSearchInput(e.target.value);
@@ -22,6 +25,15 @@ const Header = () => {
 
   const clickSearchHandler = () => {
     navigate(`/search/${searchInput}`);
+  };
+
+  const handleOpen = (e) => {
+    console.log(e.target.textContent);
+    setOpenStatus({ open: true, value: e.target.textContent });
+  };
+
+  const handleClose = () => {
+    setOpenStatus({ open: false, value: null });
   };
 
   return (
@@ -51,8 +63,22 @@ const Header = () => {
         </Input>
       </div>
       <div className={styles.sign_box}>
-        <button className={styles.button}>Sign In</button>
-        <button className={styles.button}>Sign Up</button>
+        <button
+          className={styles.button}
+          onClick={handleOpen}
+        >
+          Sign In
+        </button>
+        <button
+          className={styles.button}
+          onClick={handleOpen}
+        >
+          Sign Up
+        </button>
+        <SignModal
+          status={openStatus}
+          handleClose={handleClose}
+        />
       </div>
     </div>
   );
