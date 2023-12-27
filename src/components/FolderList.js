@@ -1,11 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import styles from "../styles/FolderList.module.scss";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styles from '../styles/FolderList.module.scss';
 
 const FolderList = () => {
   return (
     <>
-      <h2>내 폴더 목록</h2>
+      <h2 className={styles.title}>내 폴더 목록</h2>
       <div className={styles.list}>
         <ul>
           <li>

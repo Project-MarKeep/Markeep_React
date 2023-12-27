@@ -1,4 +1,4 @@
-@import 'variables', 'mixin';
+@import "variables", "mixin";
 
 .wrapper {
   color: $blue;
@@ -38,6 +38,10 @@
     flex: 1 0 auto;
     position: relative;
     box-sizing: border-box;
+
+    input {
+      background: $black;
+    }
 
     .icon_box {
       position: absolute;
