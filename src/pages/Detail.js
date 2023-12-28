@@ -34,16 +34,15 @@ const Detail = () => {
     >
       <ul>
         {list.length &&
-          list.map((data, idx) => (
+          list.map((data) => (
             <li
               key={data.id}
-              style={{ color: 'white', border: '1px solid white' }}
+              className={styles.span}
             >
-              <span>사이트 이름: {data.siteName}</span> &nbsp&nbsp&nbsp
+              <span>사이트 이름: {data.siteName}</span>
               <span>
                 사이트 URL: <a href={data.url}>{data.url}</a>
-              </span>{' '}
-              &nbsp&nbsp&nbsp
+              </span>
               <span>Description: {data.comment}</span>
             </li>
           ))}

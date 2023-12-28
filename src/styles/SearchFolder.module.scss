@@ -1,4 +1,4 @@
-@import 'variables', 'mixin';
+@import 'variables', 'mixin', 'index';
 
 .search {
   max-width: 24rem;
@@ -8,7 +8,7 @@
 
   input {
     font-size: 14px;
-    border-radius: 4px;
+    borderradius: 4px;
     margin-top: 1px;
     font-family: 'Noto-l';
     background: $black;
@@ -38,6 +38,7 @@
     }
   }
 }
+
 .list {
   max-height: 12rem;
   overflow-y: auto;
@@ -73,5 +74,24 @@
         color: $white;
       }
     }
+  }
+}
+
+.span {
+  font-size: 14px;
+  color: #fff;
+  borderradius: 4px;
+  margin-top: 1px;
+  font-family: 'Noto-l';
+  background: $black;
+  padding: 10px;
+  @include border($s: $salmon, $e: $purple);
+
+  &:hover,
+  &:focus {
+    color: #fff;
+    text-shadow: 0px 0px 3.5px #fff;
+    @include border($s: $salmon, $e: $purple);
+    @include hover($px: 2px);
   }
 }

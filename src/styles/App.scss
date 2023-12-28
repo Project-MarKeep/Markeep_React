@@ -1,4 +1,4 @@
-@import "./variables";
+@import './variables';
 
 .app {
   width: 100vw;
@@ -9,7 +9,7 @@
     padding: 0 1.2rem;
     margin: $margin;
     background: $black;
-    border-radius: $radius;
+    borderradius: $radius;
   }
 
   .main-wrapper {
@@ -22,12 +22,12 @@
     .header {
       height: fit-content;
       background: $black;
-      border-radius: $radius;
+      borderradius: $radius;
     }
 
     .content-wrapper {
       background: $black;
-      border-radius: $radius;
+      borderradius: $radius;
       display: flex;
 
       margin-top: $margin;
