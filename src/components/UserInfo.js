@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../styles/UserInfo.module.scss';
 import { ReactComponent as Pencil } from '../assets/icons/pencil.svg';
 import { ReactComponent as Cancel } from '../assets/icons/x.svg';
@@ -33,13 +33,17 @@ const UserInfo = () => {
 
     if (res.status == 200) {
       console.log('닉네임 변경완료!');
+      localStorage.setItem('nick', newNickname);
+      // setNick(res.text());
     } else {
       console.error('닉네임 변경실패');
     }
   };
 
   const [change, setChange] = useState(false);
-  const [nick, setNick] = useState(user.nickname);
+  const [nick, setNick] = useState(
+    () => localStorage.getItem('nick') || user.nickname
+  );
 
   const clickChangeHandler = () => {
     setChange(true);
@@ -56,8 +60,12 @@ const UserInfo = () => {
   };
 
   const clickCancelHandler = () => {
-    setNick(user.nickname);
+    setNick(nick);
   };
+
+  useEffect(() => {
+    localStorage.setItem('nick', nick);
+  }, [nick]);
 
   return (
     <div className={styles.wrap}>
@@ -86,7 +94,7 @@ const UserInfo = () => {
       <div>{user.email}</div>
       {!change ? (
         <div className={styles.box}>
-          <div>{user.nickname}</div>
+          <div>{localStorage.getItem('nick')}</div>
           <div
             className={styles.pencil}
             onClick={clickChangeHandler}
@@ -98,7 +106,7 @@ const UserInfo = () => {
         <div className={styles.box}>
           <input
             name='nickname'
-            placeholder={user.nickname}
+            placeholder={localStorage.getItem('nick')}
             onChange={getText}
             value={nick}
           />
