@@ -19,10 +19,16 @@ import AuthContext from '../utils/AuthContext';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 
-const ModalLogin = (setValue) => {
+const ModalLogin = ({
+  // onLoginSuccess,
+  setValue,
+  handleClose,
+}) => {
   const redirection = useNavigate();
 
   const { onLogin } = useContext(AuthContext);
+
+  const token = localStorage.getItem('ACCESS_TOKEN');
 
   const REQUEST_URL = BASE + USER + '/login';
 
@@ -59,7 +65,7 @@ const ModalLogin = (setValue) => {
 
     const res = await fetch(REQUEST_URL, {
       method: 'POST',
-      headers: { 'content-type': 'apllication/json' },
+      headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({
         email: $email.value,
         password: $password.value,
@@ -73,13 +79,22 @@ const ModalLogin = (setValue) => {
       return;
     }
 
-    const { token, userName, email, role } = await res.json(); // 서버에서 온 json 읽기
+    const { accessToken, nickname, email, refreshToken } = await res.json(); // 서버에서 온 json 읽기
+    console.log();
 
     // Context API를 사용하여 로그인 상태를 업데이트 합니다.
-    onLogin(token, userName, role);
-
+    onLogin(accessToken, nickname, refreshToken);
+    console.log(
+      '여기는 fetch쪽에 있는 로그인 리디렉션 없앴음 이거 다음이 로긴핸들임 res.json(): ',
+      accessToken,
+      nickname,
+      email,
+      refreshToken
+    );
+    // onLoginSuccess();
     // 홈으로 리다이렉트
     redirection('/');
+    handleClose();
   };
 
   // 로그인 요청 핸들러
@@ -88,6 +103,9 @@ const ModalLogin = (setValue) => {
 
     // 서버에 로그인 요청 전송
     fetchLogin();
+    console.log('이건 loginHandler이고, 리디렉션전임!');
+    // onLoginSuccess();
+    // redirection('/'); 여기 안해도 될듯
   };
 
   // forgot password 클릭시 이동

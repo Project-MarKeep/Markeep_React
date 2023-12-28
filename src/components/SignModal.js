@@ -31,6 +31,11 @@ const SignModal = ({ status, handleClose }) => {
     setValue(newValue);
   };
 
+  // const handleLoginSuccess = () => {
+  //   handleClose(); // 로그인 성공 시 모달 닫기
+  //   alert('로그인이 성공했습니다!');
+  // };
+
   useEffect(() => {
     console.log('useEffect status: ', status);
     status.value === 'Sign In' ? setValue('signIn') : setValue('signUp');
@@ -79,7 +84,13 @@ const SignModal = ({ status, handleClose }) => {
           }}
         />
       </Tabs>
-      {value === 'signIn' && <ModalLogin setValue={setValue} />}
+      {value === 'signIn' && (
+        <ModalLogin
+          // onLoginSuccess={handleLoginSuccess}
+          setValue={setValue}
+          handleClose={handleClose}
+        />
+      )}
       {value === 'signUp' && <ModalJoin />}
     </Dialog>
   );

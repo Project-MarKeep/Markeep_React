@@ -12,6 +12,13 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const [openStatus, setOpenStatus] = useState({ open: false, value: null });
 
+  // const handleLoginOrSignUp = () => {
+  //   // 로그인 또는 회원가입 로직
+  //   if(handleOpen().)
+  //   // 성공하면 모달 닫기
+  //   handleClose();
+  // };
+
   const getSearchData = (e) => {
     setSearchInput(e.target.value);
   };
@@ -28,9 +35,13 @@ const Header = () => {
   };
 
   const handleOpen = (e) => {
-    console.log(e.target.textContent);
+    // console.log(e.target.textContent);
     setOpenStatus({ open: true, value: e.target.textContent });
+    // console.log('이게 handleOpen의 결과: ', e.target.status);
+    // if (e.target.textContent === 'Sign In') {
+    // handleClose();
   };
+  // };
 
   const handleClose = () => {
     setOpenStatus({ open: false, value: null });
