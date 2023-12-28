@@ -1,0 +1,68 @@
+@import "variables", "mixin";
+
+.wrapper {
+  .nav_box {
+    margin-top: 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    position: relative;
+
+    .menu {
+      margin: 0;
+      padding: 0;
+      position: relative;
+
+      .title {
+        display: none;
+        position: absolute;
+        top: 0.5rem;
+        left: 3rem;
+        width: max-content;
+        background: $blue;
+        color: $dark;
+        font-family: Noto-m;
+        border-radius: 4px;
+
+        font-size: 14px;
+        z-index: 3;
+        padding: 2px 4px;
+      }
+
+      &:hover {
+        transition: 1s;
+        .title {
+          display: block;
+        }
+      }
+
+      .modal {
+        // display: none;
+        position: absolute;
+        top: 0.5rem;
+        left: 3rem;
+        width: 10rem;
+        background: $black;
+        color: $blue04;
+        font-family: Noto-l;
+        border-radius: 4px;
+        max-height: 16rem;
+        font-size: 14px;
+        z-index: 3;
+        padding: 0.2rem;
+        @include border();
+      }
+    }
+  }
+}
+
+.icon_box {
+  @include i-box();
+
+  .icon {
+    @include icon();
+    &:hover {
+      @include hover();
+    }
+  }
+}

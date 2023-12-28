@@ -1,0 +1,52 @@
+@import 'variables', 'mixin';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+
+  button {
+    @include btn($bg: $black, $size: 14px, $color: $blue04);
+    height: 2.5rem;
+    width: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0;
+    font-family: Noto-m;
+    border: 1.6px solid $blue04;
+    .icon {
+      @include icon(1rem, $blue04);
+    }
+  }
+}
+
+.search {
+  max-width: 24rem;
+  flex: 1 0 auto;
+  position: relative;
+  box-sizing: border-box;
+
+  input {
+    font-size: 14px;
+    margin-top: 1px;
+    border: 2px solid $blue04;
+    border-radius: 4px;
+    font-family: 'Noto-l';
+    background: $black;
+
+    &::placeholder {
+      color: $blue;
+      opacity: 0.4;
+    }
+
+    &:hover,
+    &:focus {
+      @include border($s: $salmon, $e: $purple);
+    }
+  }
+}
