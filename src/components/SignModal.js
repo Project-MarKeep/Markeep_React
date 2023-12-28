@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './SignModal.scss';
-import SnsLogin from './login/SnsLogin';
 import {
   Dialog,
   Tabs,

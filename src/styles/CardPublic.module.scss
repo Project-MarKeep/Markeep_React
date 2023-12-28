@@ -1,0 +1,113 @@
+@import 'variables', 'mixin';
+
+.wrap {
+  box-sizing: border-box;
+
+  width: 100%;
+
+  .img_box {
+    width: 100%;
+    position: relative;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    border-radius: $radius;
+
+    &:hover {
+      .hover {
+        display: flex;
+      }
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hover {
+      box-sizing: border-box;
+      width: 100%;
+      z-index: 2;
+      padding: 3rem 0.5rem 1rem;
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      font-family: Noto-m;
+      font-size: 16px;
+      color: $white;
+      position: absolute;
+      bottom: 0;
+      background: linear-gradient(to top, rgba($black, 0.8), rgba($black, 0));
+
+      .icon_box {
+        $b: $white;
+        cursor: pointer;
+        z-index: 3;
+
+        &:hover {
+          filter: contrast(1.2);
+        }
+
+        @include i-box($back: $b, $round: true);
+
+        .icon {
+          @include icon();
+        }
+
+        .marked {
+          fill: $blue;
+        }
+      }
+    }
+  }
+
+  .writer_bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+    font-family: Urban-m;
+    font-size: 14px;
+    color: $blue04;
+    height: 1rem;
+
+    $s: 0.8rem;
+    $st: $blue04;
+    .icon_box {
+      @include i-box(
+        $size: $s,
+        $stroke: $st,
+        $round: true,
+        $fill: true,
+        $border: true
+      );
+
+      .icon {
+        @include icon($s, $st, true);
+      }
+    }
+
+    .group {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      img {
+        @include round-image($s);
+      }
+    }
+
+    button {
+      @include btn($blue04, 14px, $black);
+
+      &.followed {
+        background: $grad-bp;
+      }
+
+      &:hover {
+        filter: contrast(1.3);
+      }
+    }
+  }
+}

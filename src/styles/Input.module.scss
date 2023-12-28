@@ -1,0 +1,37 @@
+@import 'variables', 'mixin';
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+
+  &:hover {
+    border-color: $blue;
+  }
+
+  input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 40px 8px 16px;
+    border: 0.1rem solid $blue04;
+    border-radius: $radius;
+    display: flex;
+    align-items: center;
+    color: $white;
+    font-family: Noto-l;
+    font-size: 16px;
+    padding: auto 40px auto 16px;
+
+    &::placeholder {
+      color: $blue;
+      opacity: 0.4;
+    }
+
+    &:focus,
+    &:hover {
+      outline: none;
+      border: 0.1rem solid $blue;
+    }
+  }
+}

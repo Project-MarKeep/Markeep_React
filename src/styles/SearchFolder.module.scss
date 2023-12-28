@@ -1,0 +1,77 @@
+@import 'variables', 'mixin';
+
+.search {
+  max-width: 24rem;
+  flex: 1 0 auto;
+  position: relative;
+  box-sizing: border-box;
+
+  input {
+    font-size: 14px;
+    border-radius: 4px;
+    margin-top: 1px;
+    font-family: 'Noto-l';
+    background: $black;
+    padding-left: 6px;
+    @include border($s: $salmon, $e: $purple);
+
+    &:hover,
+    &:focus {
+      @include border($s: $salmon, $e: $purple);
+      @include hover($px: 2px);
+    }
+  }
+
+  .icon_box {
+    position: absolute;
+    right: 4px;
+    top: 1px;
+    @include i-box();
+    cursor: pointer;
+  }
+
+  .icon {
+    @include icon($stroke: $purple);
+
+    &:hover {
+      @include hover($yellow);
+    }
+  }
+}
+.list {
+  max-height: 12rem;
+  overflow-y: auto;
+  @include scroll($salmon, $purple);
+
+  ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem 0;
+    gap: 0.5rem;
+
+    li {
+      display: block;
+      margin: 0 4px;
+      padding-left: 4px;
+      white-space: nowrap;
+      height: 1.2rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.2rem;
+      text-align: center;
+      &:hover {
+        color: $white;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: $blue04;
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+}

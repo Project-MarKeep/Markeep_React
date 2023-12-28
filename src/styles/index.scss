@@ -1,0 +1,28 @@
+@import './variables';
+
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(45deg, rgba($dark, 0.8), $dark);
+}
+
+@font-face {
+  font-family: Urban-b;
+  src: url('../assets/fonts/Urbanist-Bold.woff') format('woff');
+}
+@font-face {
+  font-family: Urban-m;
+  src: url('../assets/fonts/Urbanist-Medium.woff') format('woff');
+}
+@font-face {
+  font-family: Urban-l;
+  src: url('../assets/fonts/Urbanist-Light.woff') format('woff');
+}
+@font-face {
+  font-family: Noto-l;
+  src: url('../assets/fonts/NotoSansKR-Light.woff') format('woff');
+}
+@font-face {
+  font-family: Noto-m;
+  src: url('../assets/fonts/NotoSansKR-Medium.woff') format('woff');
+}
