@@ -8,55 +8,58 @@ import Detail from './pages/Detail';
 import './styles/App.scss';
 import Folders from './components/Folders';
 import Finds from './components/Finds';
+import { AuthContextProvider } from './utils/AuthContext';
 
 function App() {
   return (
-    <div className='app'>
-      <div className='nav'>
-        <Nav />
-      </div>
-      <div className='nav-modal'></div>
-      <div className='main-wrapper'>
-        <div className='header'>
-          <Header />
+    <AuthContextProvider>
+      <div className='app'>
+        <div className='nav'>
+          <Nav />
         </div>
-        <div className='content-wrapper'>
-          <Routes>
-            <Route
-              exact
-              path='/'
-              element={<Community />}
-            />
-            <Route
-              path='/mypage'
-              element={<MyPage />}
-            >
+        <div className='nav-modal'></div>
+        <div className='main-wrapper'>
+          <div className='header'>
+            <Header />
+          </div>
+          <div className='content-wrapper'>
+            <Routes>
               <Route
-                path='folders'
-                element={<Folders />}
+                exact
+                path='/'
+                element={<Community />}
+              />
+              <Route
+                path='/mypage'
+                element={<MyPage />}
               >
                 <Route
-                  path=':folderId'
-                  element={<Detail />}
+                  path='folders'
+                  element={<Folders />}
+                >
+                  <Route
+                    path=':folderId'
+                    element={<Detail />}
+                  />
+                </Route>
+                <Route
+                  path='finds'
+                  element={<Finds />}
                 />
               </Route>
               <Route
-                path='finds'
-                element={<Finds />}
+                path='/search/:keyword'
+                element={<Search />}
               />
-            </Route>
-            <Route
-              path='/search/:keyword'
-              element={<Search />}
-            />
-            <Route
-              path='/detail/:folderId'
-              element={<Detail />}
-            />
-          </Routes>
+              <Route
+                path='/detail/:folderId'
+                element={<Detail />}
+              />
+            </Routes>
+          </div>
         </div>
       </div>
-    </div>
+    </AuthContextProvider>
   );
 }
 

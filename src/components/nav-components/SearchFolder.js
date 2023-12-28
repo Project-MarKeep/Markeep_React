@@ -48,9 +48,9 @@ const SearchFolder = () => {
     );
 
     const { list } = await res.json();
-    // console.log('data: ', data);
     // list.map(())
     setList(list);
+    console.log('list : ', list);
   };
 
   return (

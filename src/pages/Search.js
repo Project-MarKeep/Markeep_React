@@ -5,13 +5,12 @@ import CardPublic from '../components/CardPublic';
 import { API_BASE_URL, FOLDER } from '../config/host-config';
 
 const Search = () => {
-
   const bookmarkClickHandler = () => {};
   const followClickHandler = () => {};
 
   // 검색창에서 넘어온 키워드
-  const {keyWord} = useParams();
-  
+  const { keyword } = useParams();
+
   const [list, setList] = useState([{}]);
 
   const pageNo = 1;
@@ -21,17 +20,25 @@ const Search = () => {
 
   useEffect(() => {
     fetchFolderList();
-  }, [keyWord])
+  }, [keyword]);
 
-  const fetchFolderList = async() => {
-    const res = await fetch(requestUri + "/all?page=" + `${pageNo}` + "&size=" + `${size}` + "&keyWord=" + `${keyWord}`);
+  const fetchFolderList = async () => {
+    const res = await fetch(
+      requestUri +
+        '/all?page=' +
+        `${pageNo}` +
+        '&size=' +
+        `${size}` +
+        '&keyword=' +
+        `${keyword}`
+    );
 
-    console.log(res);
-    const {list} = await res.json();
-     // 응답데이터에 핀 수 추가 요망.
+    const { list } = await res.json();
+    // 응답데이터에 핀 수 추가 요망.
+    console.log('list: ', list);
 
-     setList(list);
-  }
+    setList(list);
+  };
 
   const td = {
     image:
@@ -52,9 +59,9 @@ const Search = () => {
       <div className={styles.content}>
         {/* 커뮤니티 북마크 폴더 불러와서 여기에 넣으면 돼요.
         아래 CardPublic은 예시로 넣어놓은 거니까 삭제하세요. */}
-        {list.map((data) => (
+        {list.map((data, idx) => (
           <CardPublic
-            key={data.id}
+            key={idx}
             data={data}
             isMarked={td.isMarked}
             isFollowed={td.isFollowed}
@@ -62,7 +69,8 @@ const Search = () => {
             bookmarkClickHandler={bookmarkClickHandler}
             followClickHandler={followClickHandler}
           />
-        ))}</div>
+        ))}
+      </div>
     </div>
   );
 };
