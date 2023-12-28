@@ -77,7 +77,7 @@ const Add = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        folderId: ,
+        // folderId: folderId,
         siteName: title,
         url: url,
       }),

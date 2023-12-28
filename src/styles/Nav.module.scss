@@ -1,11 +1,11 @@
-@import 'variables', 'mixin';
+@import "variables", "mixin";
 
 .wrapper {
   .nav_box {
-    margin-top: 8rem;
+    margin-top: 6rem;
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
+    gap: 1.2rem;
     position: relative;
 
     .menu {
@@ -41,7 +41,7 @@
         position: absolute;
         top: 0.5rem;
         left: 3rem;
-        width: 12rem;
+        width: 10rem;
         background: $black;
         color: $blue04;
         font-family: Noto-l;

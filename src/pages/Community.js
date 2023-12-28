@@ -62,8 +62,8 @@ const Community = () => {
             key={idx}
             data={data}
             isMarked={td.isMarked}
-            isFollowed={td.isFollowed}
-            pin={td.pin}
+            isFollowed={data.followFlag}
+            pin={data.pinCount}
             bookmarkClickHandler={bookmarkClickHandler}
             followClickHandler={followClickHandler}
           />

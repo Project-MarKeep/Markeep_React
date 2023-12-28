@@ -5,6 +5,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 1.5rem 1rem 2rem;
+  gap: 1rem;
+  color: $white;
+  font-size: 14px;
 
   .profile {
     width: 3.8rem;
@@ -37,6 +41,11 @@
       bottom: 0;
       right: -8px;
 
+      &:hover {
+        @include hover();
+        background-color: lighten($purple, 4);
+      }
+
       @include i-box($size: 0.8rem, $back: $blue, $round: true, $fill: true);
 
       .icon {
@@ -49,21 +58,84 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 3rem;
+    gap: 0.5rem;
+    position: relative;
+    padding-left: 1rem;
 
     input {
       background: transparent;
       color: $white;
       border: none;
-      width: fit-content;
+      border-bottom: 1.6px solid $blue04;
+      width: 5rem;
+      font-family: Noto-l;
+      font-size: 14px;
+      padding: 0;
+
+      &::placeholder {
+        color: $blue;
+        opacity: 0.4;
+      }
+
+      &:focus,
+      &:hover {
+        outline: none;
+        border-bottom-color: $blue;
+      }
     }
 
-    .icon_box {
+    .cancel {
+      @include i-box($size: 0.8rem, $round: true);
+      position: absolute;
+      z-index: 2;
+      right: 20px;
+      .icon {
+        @include icon($size: 16px, $stroke: $blue);
+
+        &:hover {
+          @include hover();
+        }
+      }
+    }
+
+    .pencil {
       @include i-box($size: 0.8rem, $round: true);
 
       .icon {
-        @include icon($size: 12px, $stroke: $blue, $fill: true);
+        @include icon($size: 16px, $stroke: $blue, $fill: true);
+
+        &:hover {
+          @include hover();
+          fill: $purple;
+        }
       }
+    }
+    .check {
+      @include i-box($size: 0.8rem, $round: true);
+
+      .icon {
+        @include icon($size: 16px, $stroke: $blue);
+
+        &:hover {
+          @include hover();
+        }
+      }
+    }
+  }
+
+  button {
+    background: $blue;
+    border: none;
+    border-radius: 4px;
+    font-family: Noto-m;
+    font-size: 12px;
+    color: $black;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 2px 4px;
+
+    &:hover {
+      filter: contrast(1.3);
     }
   }
 }

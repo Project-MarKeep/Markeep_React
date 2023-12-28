@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './SignModal.scss';
-import SnsLogin from './login/SnsLogin';
 import {
   Dialog,
   Tabs,
@@ -31,6 +30,11 @@ const SignModal = ({ status, handleClose }) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  // const handleLoginSuccess = () => {
+  //   handleClose(); // 로그인 성공 시 모달 닫기
+  //   alert('로그인이 성공했습니다!');
+  // };
 
   useEffect(() => {
     console.log('useEffect status: ', status);
@@ -80,7 +84,13 @@ const SignModal = ({ status, handleClose }) => {
           }}
         />
       </Tabs>
-      {value === 'signIn' && <ModalLogin setValue={setValue} />}
+      {value === 'signIn' && (
+        <ModalLogin
+          // onLoginSuccess={handleLoginSuccess}
+          setValue={setValue}
+          handleClose={handleClose}
+        />
+      )}
       {value === 'signUp' && <ModalJoin />}
     </Dialog>
   );

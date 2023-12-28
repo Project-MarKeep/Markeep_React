@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ReactComponent as SearchIcon } from "../assets/icons/search.svg";
 import { ReactComponent as DashboardIcon } from "../assets/icons/dashboard.svg";
 import { ReactComponent as PlusIcon } from "../assets/icons/plus.svg";
@@ -12,32 +12,74 @@ import FolderList from "./FolderList";
 import UserInfo from "./UserInfo";
 
 const Nav = () => {
+  const [active, setActive] = useState("");
+
+  const ref = useRef();
+
+  const clickButtonHandler = (e) => {
+    const name = e.currentTarget.getAttribute("name");
+
+    if (active === name) {
+      setActive("");
+      return;
+    }
+
+    setActive(name);
+  };
+
+  useEffect(() => {
+    const clickOutside = (e) => {
+      // 모달이 열려 있고 모달의 바깥쪽을 눌렀을 때 창 닫기
+      if (
+        active &&
+        ref.current &&
+        !ref.current.contains(e.target) &&
+        e.target.tagName !== "svg" &&
+        e.target.tagName !== "path"
+      ) {
+        setActive("");
+      }
+    };
+
+    document.addEventListener("mousedown", clickOutside);
+
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener("mousedown", clickOutside);
+    };
+  }, [active]);
+
   const menus = [
     {
       title: "내 폴더 검색",
       icon: <SearchIcon className={styles.icon} />,
       content: <SearchFolder />,
+      name: "title",
     },
-    // {
-    //   title: "마이 페이지",
-    //   icon: <DashboardIcon className={styles.icon} />,
-    //   link: "/mypage",
-    // },
+    {
+      title: "마이 페이지",
+      icon: <DashboardIcon className={styles.icon} />,
+      link: "/mypage",
+      name: "mypage",
+    },
     {
       title: "북마크 추가",
       icon: <PlusIcon className={styles.icon} />,
       content: <Add />,
+      name: "add",
     },
-    // {
-    //   title: "내 폴더",
-    //   icon: <FolderIcon className={styles.icon} />,
-    //   content: <FolderList />,
-    // },
-    // {
-    //   title: "내 정보",
-    //   icon: <UserIcon className={styles.icon} />,
-    //   content: <UserInfo />,
-    // },
+    {
+      title: "내 폴더",
+      icon: <FolderIcon className={styles.icon} />,
+      content: <FolderList />,
+      name: "folders",
+    },
+    {
+      title: "내 정보",
+      icon: <UserIcon className={styles.icon} />,
+      content: <UserInfo />,
+      name: "user",
+    },
   ];
   return (
     <div className={styles.wrapper}>
@@ -46,45 +88,35 @@ const Nav = () => {
           return (
             <div className={styles.menu} key={idx}>
               {menu.link ? (
-                <Link to={menu.link} className={styles.icon_box}>
+                <Link
+                  to={menu.link}
+                  className={styles.icon_box}
+                  name={menu.name}
+                  onClick={clickButtonHandler}
+                >
                   {menu.icon}
                 </Link>
               ) : (
-                <div to={menu.link} className={styles.icon_box}>
+                <div
+                  to={menu.link}
+                  className={styles.icon_box}
+                  name={menu.name}
+                  onClick={clickButtonHandler}
+                >
                   {menu.icon}
                 </div>
               )}
               <div className={styles.title}>{menu.title}</div>
-              {!menu.link && <div className={styles.modal}>{menu.content}</div>}
+              {!menu.link && active === menu.name && (
+                <div className={styles.modal} ref={ref}>
+                  {menu.content}
+                </div>
+              )}
             </div>
           );
         })}
       </div>
     </div>
-
-    // <div className={styles.wrapper}>
-    //   <div className={styles.nav_box}>
-    //     <div className={styles.icon_box}>
-    //       <SearchIcon className={styles.icon} />
-    //     </div>
-    //     <Link
-    //       className={styles.icon_box}
-    //       to={'/mypage'}
-    //     >
-    //       <DashboardIcon className={styles.icon} />
-    //     </Link>
-    //     <div className={styles.icon_box}>
-    //       <PlusIcon className={styles.icon} />
-    //     </div>
-    //     <div className={styles.icon_box}>
-    //       <FolderIcon className={styles.icon} />
-    //     </div>
-    //     <div className={styles.icon_box}>
-    //       <UserIcon className={styles.icon} />
-    //     </div>
-    //   </div>
-    //   <div className={styles.nav_box_detail}></div>
-    // </div>
   );
 };
 
