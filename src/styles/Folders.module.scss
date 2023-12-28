@@ -1,0 +1,32 @@
+@import "variables", "mixin";
+
+.wrap {
+  width: 100%;
+  height: fit-content;
+  border: 1px solid white;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(485px, 1fr));
+
+  .group {
+    border: 1px solid blue;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+      color: $white;
+      font-family: Urban-m;
+      font-weight: 500;
+    }
+
+    .folders {
+      border: 1px solid yellow;
+      flex: 1 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 8px;
+    }
+  }
+}

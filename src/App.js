@@ -6,6 +6,8 @@ import MyPage from './pages/MyPage';
 import Search from './pages/Search';
 import Detail from './pages/Detail';
 import './styles/App.scss';
+import Folders from './components/Folders';
+import Finds from './components/Finds';
 
 function App() {
   return (
@@ -28,9 +30,23 @@ function App() {
             <Route
               path='/mypage'
               element={<MyPage />}
-            />
+            >
+              <Route
+                path='folders'
+                element={<Folders />}
+              >
+                <Route
+                  path=':folderId'
+                  element={<Detail />}
+                />
+              </Route>
+              <Route
+                path='finds'
+                element={<Finds />}
+              />
+            </Route>
             <Route
-              path='/search/:keyWord'
+              path='/search/:keyword'
               element={<Search />}
             />
             <Route

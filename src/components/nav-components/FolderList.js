@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styles from '../styles/FolderList.module.scss';
+import React from "react";
+import { Link } from "react-router-dom";
+import styles from "../../styles/FolderList.module.scss";
 
 const FolderList = () => {
   return (

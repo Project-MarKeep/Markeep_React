@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
-import { ReactComponent as SearchIcon } from '../assets/icons/search.svg';
-import Input from './Input';
-import styles from '../styles/SearchFolder.module.scss';
+import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
+import Input from '../Input';
+import styles from '../../styles/SearchFolder.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { API_BASE_URL, FOLDER } from '../config/host-config';
+import { API_BASE_URL, FOLDER } from '../../config/host-config';
 
 const SearchFolder = () => {
   const [searchInput, setSearchInput] = useState('');
