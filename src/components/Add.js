@@ -37,8 +37,11 @@ const Add = () => {
     // console.log(title);
   };
 
+  const [folderId, setFolderId] = useState(null);
+
   const GetFolderIdHandler = (selectedOption) => {
-    const folderId = selectedOption.value;
+    const id = selectedOption.value;
+    setFolderId(id); // 상태로 folderId 값을 설정
     console.log('folderId -> ', folderId);
   };
 
@@ -77,16 +80,20 @@ const Add = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        // folderId: folderId,
+        folderId: folderId,
         siteName: title,
         url: url,
       }),
     });
     console.log('title 값 또 렌더안댐? -> ', title);
+    console.log('folderId 값 또 렌더안댐? -> ', folderId);
     console.log('url 값 또 렌더안댐? -> ', url);
 
     if (res.status === 200) {
       alert('성공적으로 등록되었습니다!');
+      setFolderId(0);
+      setTitle('');
+      setUrl('');
     } else if (res.status === 400) {
       alert('입력 값을 다시 한번 확인해주십시오!');
     } else {

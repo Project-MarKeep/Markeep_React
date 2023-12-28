@@ -9,7 +9,7 @@
     padding: 0 1rem;
     margin: $margin;
     background: $black;
-    borderradius: $radius;
+    border-radius: $radius;
   }
 
   .main-wrapper {
@@ -22,12 +22,12 @@
     .header {
       height: fit-content;
       background: $black;
-      borderradius: $radius;
+      border-radius: $radius;
     }
 
     .content-wrapper {
       background: $black;
-      borderradius: $radius;
+      border-radius: $radius;
       display: flex;
 
       margin-top: $margin;

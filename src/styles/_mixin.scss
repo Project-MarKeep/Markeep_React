@@ -3,7 +3,7 @@
 @mixin round-image($size: 1.5rem) {
   width: $size * 1.5;
   height: $size * 1.5;
-  borderradius: calc($size * 1.5 / 2);
+  border-radius: calc($size * 1.5 / 2);
 }
 
 // 아이콘 사이즈, 배경색, 선색, 둥근테두리(bool), 아이콘 내부 채우기(bool), 윤곽선
@@ -17,7 +17,7 @@
 ) {
   width: $size * 1.5;
   height: $size * 1.5;
-  borderradius: if(round, calc($size * 1.5 / 2), $radius);
+  border-radius: if(round, calc($size * 1.5 / 2), $radius);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,7 +47,7 @@
 @mixin btn($bg: transparent, $size: 16px, $color: $blue, $font: m) {
   background: $bg;
   border: none;
-  borderradius: $radius;
+  border-radius: $radius;
   font-family: 'Urban-' + $font;
   font-size: $size;
   color: $color;
@@ -62,7 +62,7 @@
 
   &::-webkit-scrollbar-thumb {
     background: linear-gradient($c1, $c2);
-    borderradius: 1px;
+    border-radius: 1px;
     background-clip: padding-box;
     border: 5px solid transparent;
   }

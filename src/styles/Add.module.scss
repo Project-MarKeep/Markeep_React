@@ -11,7 +11,7 @@
     @include btn($bg: $black, $size: 14px, $color: $blue04);
     height: 2.5rem;
     width: 100%;
-    borderradius: 4px;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,7 +35,7 @@
     font-size: 14px;
     margin-top: 1px;
     border: 2px solid $blue04;
-    borderradius: 4px;
+    border-radius: 4px;
     font-family: 'Noto-l';
     background: $black;
 
@@ -54,7 +54,7 @@
 .addSiteBtn {
   font-size: 14px;
   color: #fff;
-  borderradius: 4px;
+  border-radius: 4px;
   margin-top: 1px;
   font-family: 'Noto-l';
   background: $black;

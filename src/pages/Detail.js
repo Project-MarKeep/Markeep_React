@@ -4,6 +4,7 @@ import { API_BASE_URL, SITE } from '../config/host-config';
 import styles from '../styles/SearchFolder.module.scss';
 import CardPublic from '../components/CardPublic';
 import { colors } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Detail = () => {
   const { folderId } = useParams();
@@ -26,7 +27,7 @@ const Detail = () => {
   };
   useEffect(() => {
     fetchMySiteList();
-  }, []);
+  }, [folderId]);
   return (
     <div
       className={styles.list}
@@ -35,16 +36,22 @@ const Detail = () => {
       <ul>
         {list.length &&
           list.map((data) => (
-            <li
+            <Link
               key={data.id}
-              className={styles.span}
+              to={data.url}
             >
-              <span>사이트 이름: {data.siteName}</span>
-              <span>
-                사이트 URL: <a href={data.url}>{data.url}</a>
-              </span>
-              <span>Description: {data.comment}</span>
-            </li>
+              <li
+                key={data.id}
+                className={styles.span}
+                // onClick={}
+              >
+                <span>사이트 이름: {data.siteName} | </span>
+                <span>
+                  사이트 URL: <a href={data.url}>{data.url}</a>
+                </span>
+                <span> | Description: {data.comment}</span>
+              </li>
+            </Link>
           ))}
       </ul>
     </div>
