@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 // 새로운 전역 컨텍스트 생성
 export const AuthContext = React.createContext({
@@ -14,7 +14,7 @@ export const AuthContextProvider = (props) => {
 
   // 컴포넌트가 렌더링될 때 localStorage에서 로그인 정보를 가지고 와서 상태를 설정.
   useEffect(() => {
-    if (localStorage.getItem("isLoggedIn") === "1") {
+    if (localStorage.getItem('isLoggedIn') === '1') {
       setIsLoggedIn(true);
     }
   }, []);
@@ -26,14 +26,14 @@ export const AuthContextProvider = (props) => {
   };
 
   // 로그인 핸들러
-  const loginHandler = (token, nickName, email) => {
-    localStorage.setItem("isLoggedIn", "1");
+  const loginHandler = (token, nickname, email) => {
+    localStorage.setItem('isLoggedIn', '1');
     //json에 담긴 인증정보를 클라이언트에 보관
     // 1. 로컬 스토리지 - 브라우저가 종료되어도 보관됨.
     // 2. 세션 스토리지 - 브라우저가 종료되면 사라짐.
-    localStorage.setItem("ACCESS_TOKEN", token);
-    localStorage.setItem("NICKNAME", nickName);
-    localStorage.setItem("USER_EMAIL", email);
+    localStorage.setItem('ACCESS_TOKEN', token);
+    localStorage.setItem('NICKNAME', nickname);
+    localStorage.setItem('USER_EMAIL', email);
     setIsLoggedIn(true);
   };
 
