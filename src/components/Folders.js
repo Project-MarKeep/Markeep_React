@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from '../styles/Folders.module.scss';
 import CardPrivate from './card/CardPrivate';
 import { API_BASE_URL, FOLDER } from '../config/host-config';
-import FolderList from './nav-components/FolderList';
-import CardPublic from './CardPublic';
+import CardPublic from './card/CardPublic';
 
 const Folders = () => {
   const [folderList, setFolderList] = useState([]);

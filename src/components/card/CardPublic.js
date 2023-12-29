@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "../../styles/CardPublic.module.scss";
-import { ReactComponent as BookmarkIcon } from "../../assets/icons/bookmark.svg";
-import { ReactComponent as PinViewIcon } from "../../assets/icons/pin.svg";
+import React from 'react';
+import styles from '../../styles/CardPublic.module.scss';
+import { ReactComponent as BookmarkIcon } from '../../assets/icons/bookmark.svg';
+import { ReactComponent as PinViewIcon } from '../../assets/icons/pin.svg';
 
 const CardPublic = ({
   data,
@@ -18,7 +18,7 @@ const CardPublic = ({
       <div className={styles.img_box}>
         <img
           src={
-            data.folderImg || require('../assets/icons/defaultFolderImg.jpg')
+            data.folderImg || require('../../assets/img/defaultFolderImg.jpg')
           }
           alt='폴더 이미지'
         />
@@ -43,7 +43,7 @@ const CardPublic = ({
               <img
                 src={
                   data.profileImage ||
-                  require('../assets/icons/defaultProfileImg.jpg')
+                  require('../../assets/img/defaultProfileImg.jpg')
                 }
                 alt='프로필 사진'
               />
