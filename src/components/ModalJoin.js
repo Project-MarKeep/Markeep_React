@@ -225,7 +225,7 @@ const ModalJoin = () => {
                   color: 'lightgray',
                   width: '80%',
                   margin: 'auto',
-                  borderRadius: '20px',
+                  borderra: '20px',
                 },
               }}
               sx={{
