@@ -7,6 +7,8 @@ import Search from './pages/Search';
 import Detail from './pages/Detail';
 import './styles/App.scss';
 import { AuthContextProvider } from './utils/AuthContext';
+import Folders from './components/Folders';
+import Finds from './components/Finds';
 
 function App() {
   return (

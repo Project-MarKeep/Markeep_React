@@ -10,7 +10,7 @@ const FolderList = () => {
   const { getFolders } = useContext(AuthContext);
   console.log(
     '이 getFolders는 내 폴더 목록 리스트 정보를 가지고 있는 함수입니다. -> ',
-    getFolders()
+    getFold ers()
   );
   // useAsync({ promiseFn: getFolders });
 

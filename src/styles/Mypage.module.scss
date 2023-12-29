@@ -1,0 +1,36 @@
+@import "variables", "mixin";
+
+.wrap {
+  //   border: 1px solid white;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+
+  .header {
+    // border: 1px solid wheat;
+
+    h2 {
+      //   text-align: center;
+      font: {
+        family: Urban-m;
+        size: 24px;
+      }
+
+      color: $white;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background: linear-gradient(135deg, $blue, $purple);
+      background-clip: text;
+      color: transparent;
+    }
+  }
+
+  .content {
+    border: 1px solid salmon;
+    display: flex;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    @include scroll();
+  }
+}

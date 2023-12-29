@@ -6,10 +6,10 @@ import { ReactComponent as FolderIcon } from "../assets/icons/folder.svg";
 import { ReactComponent as UserIcon } from "../assets/icons/user.svg";
 import { Link } from "react-router-dom";
 import styles from "../styles/Nav.module.scss";
-import SearchFolder from "./SearchFolder";
-import Add from "./Add";
-import FolderList from "./FolderList";
-import UserInfo from "./UserInfo";
+import SearchFolder from "./nav-components/SearchFolder";
+import Add from "./nav-components/Add";
+import FolderList from "./nav-components/FolderList";
+import UserInfo from "./nav-components/UserInfo";
 
 const Nav = () => {
   const [active, setActive] = useState("");
@@ -59,7 +59,7 @@ const Nav = () => {
     {
       title: "마이 페이지",
       icon: <DashboardIcon className={styles.icon} />,
-      link: "/mypage",
+      link: "/mypage/folders",
       name: "mypage",
     },
     {

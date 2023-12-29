@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import styles from "../styles/UserInfo.module.scss";
-import { ReactComponent as Pencil } from "../assets/icons/pencil.svg";
-import { ReactComponent as Cancel } from "../assets/icons/x.svg";
-import { ReactComponent as Check } from "../assets/icons/check.svg";
+import styles from "../../styles/UserInfo.module.scss";
+import { ReactComponent as Pencil } from "../../assets/icons/pencil.svg";
+import { ReactComponent as Cancel } from "../../assets/icons/x.svg";
+import { ReactComponent as Check } from "../../assets/icons/check.svg";
 
 const UserInfo = () => {
   const user = {
