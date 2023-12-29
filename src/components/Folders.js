@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../styles/Folders.module.scss';
-import CardPrivate from './CardPrivate';
+import CardPrivate from './card/CardPrivate';
 import { API_BASE_URL, FOLDER } from '../config/host-config';
 import FolderList from './nav-components/FolderList';
 import CardPublic from './CardPublic';

@@ -80,7 +80,6 @@ const ModalLogin = ({
     }
 
     const { accessToken, nickname, email, refreshToken } = await res.json(); // 서버에서 온 json 읽기
-    console.log();
 
     // Context API를 사용하여 로그인 상태를 업데이트 합니다.
     onLogin(accessToken, nickname, email, refreshToken);

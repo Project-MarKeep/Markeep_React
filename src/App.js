@@ -8,6 +8,7 @@ import Detail from './pages/Detail';
 import './styles/App.scss';
 import Folders from './components/Folders';
 import Finds from './components/Finds';
+import Modify from './pages/Modify';
 import { AuthContextProvider } from './utils/AuthContext';
 
 function App() {
@@ -38,8 +39,12 @@ function App() {
                   element={<Folders />}
                 >
                   <Route
-                    path=':folderId'
+                    path='detail'
                     element={<Detail />}
+                  />
+                  <Route
+                    path='modify'
+                    element={<Modify />}
                   />
                 </Route>
                 <Route

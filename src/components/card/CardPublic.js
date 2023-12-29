@@ -1,7 +1,7 @@
-import React from 'react';
-import styles from '../styles/CardPublic.module.scss';
-import { ReactComponent as BookmarkIcon } from '../assets/icons/bookmark.svg';
-import { ReactComponent as PinViewIcon } from '../assets/icons/pin.svg';
+import React from "react";
+import styles from "../../styles/CardPublic.module.scss";
+import { ReactComponent as BookmarkIcon } from "../../assets/icons/bookmark.svg";
+import { ReactComponent as PinViewIcon } from "../../assets/icons/pin.svg";
 
 const CardPublic = ({
   data,

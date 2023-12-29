@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const AuthContext = React.createContext({
   isLoggedIn: false, // 로그인 했는지의 여부 추적
   onLogout: () => {},
-  onLogin: (email, password) => {},
+  onLogin: () => {},
   getFolders: () => {},
 });
 
