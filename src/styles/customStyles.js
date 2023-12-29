@@ -45,8 +45,8 @@ export const customStyles = {
     },
     '::-webkit-scrollbar-thumb': {
       background: `linear-gradient(${colors.salmon}, ${colors.purple})`,
-      'border-radius': '1px',
-      'background-clip': 'padding-box',
+      borderRadius: '1px',
+      backgroundClip: 'padding-box',
       border: '5px solid transparent',
     },
   }),

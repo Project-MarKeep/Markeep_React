@@ -12,3 +12,6 @@ if (clientHostName === "localhost") {
 
 export const API_BASE_URL = backEndHostName;
 export const USER = "/user";
+export const FOLDER = "/folders";
+export const SITE = "/site";
+export const FOLLOW = "/follow";
