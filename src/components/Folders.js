@@ -64,28 +64,27 @@ const Folders = () => {
     <div className={styles.wrap}>
       <div className={styles.group}>
         <h3>Public Folders</h3>
+        <div className={styles.folders}></div>
+        {myPageList(folderList)
+          .filter((f) => !f.hideFlag)
+          .map((folder) => {
+            return (
+              <CardPublic
+                key={folder.id}
+                data={folder}
+                myPageFlag={true}
+              />
+            );
+          })}
+      </div>
+      <div className={styles.group}>
+        <h3>Private Folders</h3>
         <div className={styles.folders}>
           {myPageList(folderList)
             .filter((f) => f.hideFlag)
             .map((folder) => {
               return (
                 <CardPrivate
-                  key={folder.id}
-                  data={folder}
-                  myPageFlag={true}
-                />
-              );
-            })}
-        </div>
-      </div>
-      <div className={styles.group}>
-        <h3>Private Folders</h3>
-        <div className={styles.folders}>
-          {myPageList(folderList)
-            .filter((f) => !f.hideFlag)
-            .map((folder) => {
-              return (
-                <CardPublic
                   key={folder.id}
                   data={folder}
                   myPageFlag={true}

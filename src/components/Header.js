@@ -1,9 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import styles from '../styles/Header.module.scss';
 import Input from './Input';
 import { ReactComponent as SearchIcon } from '../assets/icons/search.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import SignModal from './SignModal';
+import { isLogin } from '../utils/login-utils';
+import AuthContext from '../utils/AuthContext';
 
 const Header = () => {
   const [searchInput, setSearchInput] = useState('');
@@ -11,6 +13,8 @@ const Header = () => {
   const inputRef = useRef();
   const [open, setOpen] = useState(false);
   const [openStatus, setOpenStatus] = useState({ open: false, value: null });
+
+  const { onLogout, isLoggedIn } = useContext(AuthContext);
 
   // const handleLoginOrSignUp = () => {
   //   // 로그인 또는 회원가입 로직
@@ -74,18 +78,29 @@ const Header = () => {
         </Input>
       </div>
       <div className={styles.sign_box}>
-        <button
-          className={styles.button}
-          onClick={handleOpen}
-        >
-          Sign In
-        </button>
-        <button
-          className={styles.button}
-          onClick={handleOpen}
-        >
-          Sign Up
-        </button>
+        {!isLoggedIn ? (
+          <>
+            <button
+              className={styles.button}
+              onClick={handleOpen}
+            >
+              Sign In
+            </button>
+            <button
+              className={styles.button}
+              onClick={handleOpen}
+            >
+              Sign Up
+            </button>
+          </>
+        ) : (
+          <button
+            className={styles.button}
+            onClick={onLogout}
+          >
+            Sign out
+          </button>
+        )}
         <SignModal
           status={openStatus}
           handleClose={handleClose}

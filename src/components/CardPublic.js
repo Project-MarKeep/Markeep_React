@@ -5,7 +5,7 @@ import { ReactComponent as PinViewIcon } from '../assets/icons/pin.svg';
 
 const CardPublic = ({
   data,
-  MyPageFlag,
+  myPageFlag,
   isMarked,
   isFollowed,
   pin,
@@ -24,7 +24,7 @@ const CardPublic = ({
         />
         <div className={styles.hover}>
           <span>{data.title}</span>
-          {MyPageFlag && (
+          {!!myPageFlag && (
             <div
               className={styles.icon_box}
               onClick={bookmarkClickHandler}
@@ -37,7 +37,7 @@ const CardPublic = ({
         </div>
       </div>
       <div className={styles.writer_bar}>
-        {!MyPageFlag && (
+        {!myPageFlag && (
           <>
             <div className={styles.group}>
               <img

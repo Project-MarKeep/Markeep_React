@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { API_BASE_URL, USER } from '../config/host-config';
+import { useNavigate } from 'react-router-dom';
 
 // 새로운 전역 컨텍스트 생성
 const AuthContext = React.createContext({
   isLoggedIn: false, // 로그인 했는지의 여부 추적
-  userName: '',
   onLogout: () => {},
   onLogin: (email, password) => {},
 });
@@ -15,6 +15,7 @@ export const AuthContextProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState(localStorage.getItem('ACCESS_TOKEN'));
   const [loading, setLoading] = useState(true);
+  const redirection = useNavigate();
 
   // 컴포넌트가 렌더링 될 때 localStorage에서 로그인 정보를 가지고 와서 상태를 설정.
   useEffect(() => {
@@ -51,6 +52,7 @@ export const AuthContextProvider = (props) => {
   const logoutHandler = () => {
     localStorage.clear(); // 로컬스토리지 내용 전체 삭제
     setIsLoggedIn(false);
+    redirection('/');
   };
 
   // 로그인 핸들러
