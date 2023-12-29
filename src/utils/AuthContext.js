@@ -54,12 +54,13 @@ export const AuthContextProvider = (props) => {
   };
 
   // 로그인 핸들러
-  const loginHandler = (token, nickname, email) => {
+  const loginHandler = (token, nickname, email, refreshToken) => {
     localStorage.setItem('isLoggedIn', '1');
     // json에 담긴 인증정보를 클라이언트에 보관
     localStorage.setItem('ACCESS_TOKEN', token);
     localStorage.setItem('NICKNAME', nickname);
     localStorage.setItem('USER_EMAIL', email);
+    localStorage.setItem('REFRESH_TOKEN', refreshToken);
     setIsLoggedIn(true);
   };
 

@@ -25,7 +25,7 @@ const Community = () => {
         `${pageNo}` +
         '&size=' +
         `${size}` +
-        '&keyWord='
+        '&keyword='
     );
 
     console.log(res);

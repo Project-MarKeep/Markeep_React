@@ -37,7 +37,7 @@ const CardPublic = ({
         </div>
       </div>
       <div className={styles.writer_bar}>
-        {MyPageFlag && (
+        {!MyPageFlag && (
           <>
             <div className={styles.group}>
               <img

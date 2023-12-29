@@ -83,7 +83,7 @@ const ModalLogin = ({
     console.log();
 
     // Context API를 사용하여 로그인 상태를 업데이트 합니다.
-    onLogin(accessToken, nickname, refreshToken);
+    onLogin(accessToken, nickname, email, refreshToken);
     console.log(
       '여기는 fetch쪽에 있는 로그인 리디렉션 없앴음 이거 다음이 로긴핸들임 res.json(): ',
       accessToken,

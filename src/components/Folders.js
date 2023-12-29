@@ -47,7 +47,7 @@ const Folders = () => {
 
   useEffect(() => {
     fetchMyFolderList();
-    console.log('folderList: ', folderList);
+    console.log('myFolderList: ', folderList);
   }, []);
 
   const myPageList = (folderList) => {
