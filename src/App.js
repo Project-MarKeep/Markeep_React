@@ -10,6 +10,7 @@ import Folders from './components/Folders';
 import Finds from './components/Finds';
 import Modify from './pages/Modify';
 import { AuthContextProvider } from './utils/AuthContext';
+import SearchDetail from './pages/SearchDetail';
 
 function App() {
   return (
@@ -57,8 +58,8 @@ function App() {
                 element={<Search />}
               />
               <Route
-                path='/detail/:folderId'
-                element={<Detail />}
+                path='/detail/:folderId/:title/:tagNames/:folderImg'
+                element={<SearchDetail />}
               />
             </Routes>
           </div>

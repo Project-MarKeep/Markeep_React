@@ -24,45 +24,41 @@ const CardPublic = ({
         />
         <div className={styles.hover}>
           <span>{data.title}</span>
-          {!!myPageFlag && (
-            <div
-              className={styles.icon_box}
-              onClick={bookmarkClickHandler}
-            >
-              <BookmarkIcon
-                className={`${styles.icon} ${isMarked && styles.marked}`}
-              />
-            </div>
-          )}
+          <div
+            className={styles.icon_box}
+            onClick={bookmarkClickHandler}
+          >
+            <BookmarkIcon
+              className={`${styles.icon} ${isMarked && styles.marked}`}
+            />
+          </div>
         </div>
       </div>
       <div className={styles.writer_bar}>
-        {!myPageFlag && (
-          <>
-            <div className={styles.group}>
-              <img
-                src={
-                  data.profileImage ||
-                  require('../../assets/img/defaultProfileImg.jpg')
-                }
-                alt='프로필 사진'
-              />
-              <span>{data.nickname}</span>
-              <button
-                className={isFollowed && styles.followed}
-                onClick={followClickHandler}
-              >
-                {isFollowed ? 'Following' : 'Follow'}
-              </button>
+        <>
+          <div className={styles.group}>
+            <img
+              src={
+                data.profileImage ||
+                require('../../assets/img/defaultProfileImg.jpg')
+              }
+              alt='프로필 사진'
+            />
+            <span>{data.nickname}</span>
+            <button
+              className={isFollowed && styles.followed}
+              onClick={followClickHandler}
+            >
+              {isFollowed ? 'Following' : 'Follow'}
+            </button>
+          </div>
+          <div className={styles.group}>
+            <div className={styles.icon_box}>
+              <PinViewIcon className={styles.icon} />
             </div>
-            <div className={styles.group}>
-              <div className={styles.icon_box}>
-                <PinViewIcon className={styles.icon} />
-              </div>
-              {pin}
-            </div>
-          </>
-        )}
+            {pin}
+          </div>
+        </>
       </div>
     </div>
   );

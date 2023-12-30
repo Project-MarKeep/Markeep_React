@@ -2,8 +2,9 @@ import React, { useRef, useState } from 'react';
 import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
 import Input from '../Input';
 import styles from '../../styles/SearchFolder.module.scss';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Outlet } from 'react-router-dom';
 import { API_BASE_URL, FOLDER } from '../../config/host-config';
+import SearchDetail from '../../pages/SearchDetail';
 
 const SearchFolder = () => {
   const [searchInput, setSearchInput] = useState('');
@@ -48,7 +49,7 @@ const SearchFolder = () => {
     );
 
     const { list } = await res.json();
-    // console.log('data: ', data);
+    console.log('data: ', list);
     // list.map(())
     setList(list);
   };
@@ -77,7 +78,11 @@ const SearchFolder = () => {
         <ul>
           {list.map((data, idx) => (
             <li key={idx}>
-              <Link to={`/detail/${data.id}`}>{data.title}</Link>
+              <Link
+                to={`/detail/${data.id}/${data.title}/${data.tagNames}/${data.folderImg}`}
+              >
+                {data.title}
+              </Link>
             </li>
           ))}
         </ul>
