@@ -19,6 +19,7 @@ const Add = () => {
 
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
+  const [comment, setComment] = useState('');
   const [folderId, setFolderId] = useState();
   const inputRef = useRef();
 
@@ -53,6 +54,11 @@ const Add = () => {
     setTitle(e.target.value);
     console.log(title);
   };
+
+  const getComment = (e) => {
+    setComment(e.target.value);
+    console.log(comment);
+  }
 
   const GetFolderIdHandler = (selectedOption) => {
     const folderId = selectedOption.value;
@@ -168,7 +174,17 @@ const Add = () => {
             placeholder='북마크 주소'
             value={url}
             onChange={getUrl}
-            onKeyDown={keyDownHandler}
+            ref={inputRef}
+          />
+        </Input>
+      </div>
+      <div className={styles.search}>
+        <Input>
+          <input
+            type='text'
+            placeholder='북마크 코멘트'
+            value={comment}
+            onChange={getComment}
             ref={inputRef}
           />
         </Input>
