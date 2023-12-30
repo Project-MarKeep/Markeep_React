@@ -6,9 +6,10 @@ import MyPage from './pages/MyPage';
 import Search from './pages/Search';
 import Detail from './pages/Detail';
 import './styles/App.scss';
-import { AuthContextProvider } from './utils/AuthContext';
 import Folders from './components/Folders';
 import Finds from './components/Finds';
+import Modify from './pages/Modify';
+import { AuthContextProvider } from './utils/AuthContext';
 
 function App() {
   return (
@@ -32,9 +33,27 @@ function App() {
               <Route
                 path='/mypage'
                 element={<MyPage />}
-              />
+              >
+                <Route
+                  path='folders'
+                  element={<Folders />}
+                >
+                  <Route
+                    path='detail'
+                    element={<Detail />}
+                  />
+                  <Route
+                    path='modify'
+                    element={<Modify />}
+                  />
+                </Route>
+                <Route
+                  path='finds'
+                  element={<Finds />}
+                />
+              </Route>
               <Route
-                path='/search/:keyWord'
+                path='/search/:keyword'
                 element={<Search />}
               />
               <Route

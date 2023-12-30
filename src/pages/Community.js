@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/Community.module.scss';
-import CardPublic from '../components/CardPublic';
+import CardPublic from '../components/card/CardPublic';
 import { API_BASE_URL, FOLDER } from '../config/host-config';
 
 const Community = () => {
@@ -25,7 +25,7 @@ const Community = () => {
         `${pageNo}` +
         '&size=' +
         `${size}` +
-        '&keyWord='
+        '&keyword='
     );
 
     console.log(res);

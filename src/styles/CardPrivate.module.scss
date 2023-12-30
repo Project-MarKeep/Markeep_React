@@ -3,13 +3,17 @@
 .wrap {
   box-sizing: border-box;
   width: 100%;
-
   border: 1px solid purple;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: $white;
+  position: relative;
+
+  a {
+    color: $white;
+    text-decoration: none;
+  }
 
   h4 {
     margin: 0;
@@ -34,5 +38,27 @@
   .tag_box {
     display: flex;
     flex-wrap: wrap;
+  }
+}
+.modal {
+  position: absolute;
+  background-color: rgba($black, 0.4);
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+.check {
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &_item {
   }
 }
