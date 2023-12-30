@@ -1,20 +1,44 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from '../../styles/CardPublic.module.scss';
 import { ReactComponent as BookmarkIcon } from '../../assets/icons/bookmark.svg';
 import { ReactComponent as PinViewIcon } from '../../assets/icons/pin.svg';
+import { Link, Outlet } from 'react-router-dom';
 
 const CardPublic = ({
   data,
-  myPageFlag,
+  id, url, title, tagNames,
   isMarked,
   isFollowed,
   pin,
   bookmarkClickHandler,
   followClickHandler,
 }) => {
-  console.log(data);
+  console.log('data:', data);
+
+  const [active, setActive] = useState();
+  const ref = useRef();
+
+  const clickManageHandler = () => {
+    setActive(true);
+  };
+
+  useEffect(() => {
+    const clickOutside = (e) => {
+      if(active && ref.current && !ref.current.contains(e.target)){
+        setActive(false);
+      }
+    }
+
+    document.addEventListener('mousedown', clickOutside);
+    return (() => {
+      document.addEventListener('mousedown', clickOutside);
+    })
+
+  }, [active])
+
   return (
     <div className={styles.wrap}>
+      <Link to='detail' onClick={clickManageHandler}>
       <div className={styles.img_box}>
         <img
           src={
@@ -60,6 +84,10 @@ const CardPublic = ({
           </div>
         </>
       </div>
+      </Link>
+      {active && <div className={styles.modal}>
+        <Outlet context={{ id, url, title, tagNames, ref }} />
+      </div>}
     </div>
   );
 };

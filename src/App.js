@@ -30,7 +30,9 @@ function App() {
                 exact
                 path='/'
                 element={<Community />}
-              />
+              >
+                <Route path='detail' element={<Detail />} />
+              </Route>
               <Route
                 path='/mypage'
                 element={<MyPage />}

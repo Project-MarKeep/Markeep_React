@@ -61,13 +61,17 @@ const Community = () => {
           <CardPublic
             key={idx}
             data={data}
+            id={data.id}
+            title={data.title}
+            tagNames={data.tagNames}
+            url={data.folderImg}
             isMarked={td.isMarked}
             isFollowed={data.followFlag}
             pin={data.pinCount}
             bookmarkClickHandler={bookmarkClickHandler}
             followClickHandler={followClickHandler}
           />
-        ))}
+          ))}
       </div>
     </div>
   );

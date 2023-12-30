@@ -12,28 +12,28 @@ import { ReactComponent as Up } from '../assets/icons/up.svg';
 import { multiStyles, toDataList } from '../styles/customStyles';
 import Select from 'react-select';
 
-const Modify = () => {
+const Detail = () => {
   const folderInfo = useOutletContext();
   const [openIdx, setOpenIdx] = useState([]);
   const navigate = useNavigate();
   const { id, url, title, tagNames, ref } = folderInfo;
 
-  const sites = [];
-  const tagList = toDataList(tagNames);
+  // const sites = [];
+  // const tagList = toDataList(tagNames);
   const { folderId } = useParams();
   const requestUri = API_BASE_URL + SITE;
   const token = localStorage.getItem('ACCESS_TOKEN');
-  const [list, setList] = useState([]);
+  const [sites, setSites] = useState([]);
 
-  for (let i = 0; i < 10; i++) {
-    const s = {
-      id: `site${i}`,
-      title: `사이트이름${i}`,
-      url: 'https://m.naver.com',
-      comment: '사이트에 대한 설명입니다.',
-    };
-    sites.push(s);
-  }
+  // for (let i = 0; i < 10; i++) {
+  //   const s = {
+  //     id: `site${i}`,
+  //     title: `사이트이름${i}`,
+  //     url: 'https://m.naver.com',
+  //     comment: '사이트에 대한 설명입니다.',
+  //   };
+  //   sites.push(s);
+  // }
 
   const clickModifyHandler = () => {
     navigate('/mypage/folders/modify');
@@ -50,7 +50,7 @@ const Modify = () => {
   };
 
   const fetchMySiteList = async () => {
-    const res = await fetch(requestUri + '?folderId=' + `${folderId}`, {
+    const res = await fetch(requestUri + '?folderId=' + id, {
       headers: { Authorization: 'Bearer ' + token },
     });
     console.log(res);
@@ -58,7 +58,7 @@ const Modify = () => {
     const list = await res.json();
     console.log('lists: ', list);
     // list.map(())
-    setList(list);
+    setSites(list);
   };
   useEffect(() => {
     fetchMySiteList();
@@ -77,9 +77,9 @@ const Modify = () => {
       </div>
       <div className={styles.tag_box}>
         <Select
-          defaultValue={tagList}
+          // defaultValue={tagList}
           isMulti
-          styles={multiStyles(tagList)}
+          // styles={multiStyles(tagList)}
           isSearchable={false}
           isClearable={false}
           openMenuOnFocus={false}
@@ -136,4 +136,4 @@ const Modify = () => {
   );
 };
 
-export default Modify;
+export default Detail;
