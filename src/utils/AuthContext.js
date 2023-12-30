@@ -78,25 +78,7 @@ export const AuthContextProvider = (props) => {
     });
     const data = await res.json();
     return { data };
-    // useEffect(() => {
-    //   UsersGetFolderList();
-    // }, []);
-
-    console.log('data -> ', data);
-    return { data };
-    // console.log('확인1', myfolderList);
-    // setFolderList(myfolderList); // myfolderList를 상태로 설정
-
-    // setMyList(newList);
-
-    // const UsersGetFolderList = async () => {
-    //   const res = await fetch(requestUriFolder + '/my', {
-    //     headers: { Authorization: 'Bearer ' + token },
-    //   });
-    //   const myfolderList = await res.json();
-
-    //   myfolderList.map;
-    // };
+ 
   };
 
   return (
