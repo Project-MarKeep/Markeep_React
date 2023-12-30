@@ -36,7 +36,7 @@ const CardPrivate = ({ id, url, title, tagNames }) => {
         >
           <div className={styles.image_box}>
             <img
-              src={url}
+              src={url || require('../../assets/img/defaultFolderImg.jpg')}
               alt='폴더 이미지'
             />
           </div>
