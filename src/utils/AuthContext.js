@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { API_BASE_URL, FOLDER, USER } from '../config/host-config';
+import { useNavigate } from 'react-router-dom';
 
 // 새로운 전역 컨텍스트 생성
 const AuthContext = React.createContext({
   isLoggedIn: false, // 로그인 했는지의 여부 추적
-  userName: '',
   onLogout: () => {},
-  onLogin: (email, password) => {},
+  onLogin: () => {},
   getFolders: () => {},
 });
 
@@ -14,11 +14,9 @@ const AuthContext = React.createContext({
 // 이 컴포넌트를 통해 자식 컴포넌트에게 인증 상태와 관련된 함수들을 전달할 수 있음
 export const AuthContextProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userName, setUserName] = useState(
-    localStorage.getItem('LOGIN_USERNAME')
-  );
   const [token, setToken] = useState(localStorage.getItem('ACCESS_TOKEN'));
   const [loading, setLoading] = useState(true);
+  const redirection = useNavigate();
 
   // 컴포넌트가 렌더링 될 때 localStorage에서 로그인 정보를 가지고 와서 상태를 설정.
   useEffect(() => {
@@ -57,18 +55,18 @@ export const AuthContextProvider = (props) => {
   const logoutHandler = () => {
     localStorage.clear(); // 로컬스토리지 내용 전체 삭제
     setIsLoggedIn(false);
-    setUserName('');
+    redirection('/');
   };
 
   // 로그인 핸들러
-  const loginHandler = (token, userName, role) => {
+  const loginHandler = (token, nickname, email, refreshToken) => {
     localStorage.setItem('isLoggedIn', '1');
     // json에 담긴 인증정보를 클라이언트에 보관
     localStorage.setItem('ACCESS_TOKEN', token);
-    localStorage.setItem('LOGIN_USERNAME', userName);
-    localStorage.setItem('USER_ROLE', role);
+    localStorage.setItem('NICKNAME', nickname);
+    localStorage.setItem('USER_EMAIL', email);
+    localStorage.setItem('REFRESH_TOKEN', refreshToken);
     setIsLoggedIn(true);
-    setUserName(userName);
   };
 
   // 내 폴더 목록 가져오기
@@ -79,7 +77,7 @@ export const AuthContextProvider = (props) => {
       headers: { Authorization: 'Bearer ' + token },
     });
     const data = await res.json();
-
+    return { data };
     // useEffect(() => {
     //   UsersGetFolderList();
     // }, []);
@@ -105,7 +103,6 @@ export const AuthContextProvider = (props) => {
     <AuthContext.Provider
       value={{
         isLoggedIn,
-        userName,
         onLogout: logoutHandler,
         onLogin: loginHandler,
         getFolders: UsersGetFolderList,

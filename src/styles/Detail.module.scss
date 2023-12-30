@@ -1,0 +1,43 @@
+@import "variables", "mixin";
+
+.wrap {
+  height: fit-content;
+  background-color: $black;
+  width: 400px;
+  color: $white;
+
+  .image_box {
+    width: 100px;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  .tag_box {
+    width: 100%;
+  }
+
+  .site_box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 20rem;
+    overflow-y: auto;
+    @include scroll($salmon, $purple);
+    .site {
+      display: flex;
+      gap: 1rem;
+      padding: 0 1rem;
+    }
+
+    .icon {
+      @include icon($stroke: $blue);
+    }
+  }
+}

@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
-import styles from "../styles/CardPrivate.module.scss";
-import { Link, Outlet } from "react-router-dom";
+import React, { useEffect, useRef, useState } from 'react';
+import styles from '../styles/CardPrivate.module.scss';
+import { Link, Outlet } from 'react-router-dom';
 
-const CardPrivate = ({ id, url, title, tags }) => {
+const CardPrivate = ({ data, MyPageFlag }) => {
   const [active, setActive] = useState(false);
   const ref = useRef();
 
@@ -18,34 +18,46 @@ const CardPrivate = ({ id, url, title, tags }) => {
       }
     };
 
-    document.addEventListener("mousedown", clickOutside);
+    document.addEventListener('mousedown', clickOutside);
 
     return () => {
       // Cleanup the event listener
-      document.removeEventListener("mousedown", clickOutside);
+      document.removeEventListener('mousedown', clickOutside);
     };
   }, [active]);
 
   return (
     <div className={styles.wrap}>
-      <h4>{title}</h4>
+      <h4>{data.title}</h4>
       <div className={styles.image_box}>
-        <img src={url} alt="폴더 이미지" />
+        <img
+          src={data.folderImg}
+          alt='폴더 이미지'
+        />
       </div>
       <div className={styles.tag_box}>
-        {tags.map((tag, idx) => {
+        {data.tags.map((tag, idx) => {
           return (
-            <div key={idx} className={styles.tag}>
+            <div
+              key={idx}
+              className={styles.tag}
+            >
               {tag}
             </div>
           );
         })}
       </div>
-      <Link to={`/mypage/folders/${id}`} onClick={clickManageHandler}>
+      <Link
+        to={`/mypage/folders/${data.id}`}
+        onClick={clickManageHandler}
+      >
         Manage
       </Link>
       {active && (
-        <div className={styles.modal} ref={ref}>
+        <div
+          className={styles.modal}
+          ref={ref}
+        >
           <Outlet />
         </div>
       )}
