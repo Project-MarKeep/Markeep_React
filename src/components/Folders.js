@@ -17,7 +17,7 @@ const Folders = () => {
   //     id: i,
   //     title: `Title ${i}`,
   //     url: 'https://i.pinimg.com/564x/3a/fc/8e/3afc8ededa44767865d31be064282c31.jpg',
-  //     tags: ['태그1', '태그2', '태그3', '태그4', '태그5'],
+  //     tagNames: ['태그1', '태그2', '태그3', '태그4', '태그5'],
   //     hideFlag: false,
   //   };
 

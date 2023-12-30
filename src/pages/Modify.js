@@ -1,25 +1,25 @@
-import React, { useState } from "react";
-import { useOutletContext } from "react-router-dom";
-import styles from "../styles/Modify.module.scss";
-import { ReactComponent as Down } from "../assets/icons/down.svg";
-import { ReactComponent as Up } from "../assets/icons/up.svg";
-import { multiStyles, toDataList } from "../styles/customStyles";
-import Select from "react-select";
+import React, { useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
+import styles from '../styles/Modify.module.scss';
+import { ReactComponent as Down } from '../assets/icons/down.svg';
+import { ReactComponent as Up } from '../assets/icons/up.svg';
+import { multiStyles, toDataList } from '../styles/customStyles';
+import Select from 'react-select';
 
 const Modify = () => {
   const folderInfo = useOutletContext();
   const [openIdx, setOpenIdx] = useState([]);
-  const { id, url, title, tags, ref } = folderInfo;
+  const { id, url, title, tagNames, ref } = folderInfo;
 
   const sites = [];
-  const tagList = toDataList(tags);
+  const tagList = toDataList(tagNames);
 
   for (let i = 0; i < 10; i++) {
     const s = {
       id: `site${i}`,
       title: `사이트이름${i}`,
-      url: "https://m.naver.com",
-      comment: "사이트에 대한 설명입니다.",
+      url: 'https://m.naver.com',
+      comment: '사이트에 대한 설명입니다.',
     };
     sites.push(s);
   }
@@ -37,10 +37,16 @@ const Modify = () => {
   };
 
   return (
-    <div className={styles.wrap} ref={ref}>
+    <div
+      className={styles.wrap}
+      ref={ref}
+    >
       <h4>{title}</h4>
       <div className={styles.image_box}>
-        <img src={url} alt="폴더 이미지" />
+        <img
+          src={url}
+          alt='폴더 이미지'
+        />
       </div>
       <div className={styles.tag_box}>
         <Select
@@ -57,7 +63,7 @@ const Modify = () => {
           }}
         />
 
-        {/* {tags.map((tag, idx) => {
+        {/* {tagNames.map((tag, idx) => {
           return (
             <div key={idx} className={styles.tag}>
               {tag}
@@ -70,7 +76,10 @@ const Modify = () => {
           return (
             <div key={s.id}>
               <div className={styles.site}>
-                <img src={s.url + "/favicon.ico"} alt="favicon" />
+                <img
+                  src={s.url + '/favicon.ico'}
+                  alt='favicon'
+                />
                 <div>{s.title}</div>
                 <div>{s.url}</div>
                 {openIdx.includes(idx) ? (

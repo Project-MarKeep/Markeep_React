@@ -16,10 +16,10 @@ const Modify = () => {
   const folderInfo = useOutletContext();
   const [openIdx, setOpenIdx] = useState([]);
   const navigate = useNavigate();
-  const { id, url, title, tags, ref } = folderInfo;
+  const { id, url, title, tagNames, ref } = folderInfo;
 
   const sites = [];
-  const tagList = toDataList(tags);
+  const tagList = toDataList(tagNames);
   const { folderId } = useParams();
   const requestUri = API_BASE_URL + SITE;
   const token = localStorage.getItem('ACCESS_TOKEN');
@@ -91,7 +91,7 @@ const Modify = () => {
           }}
         />
 
-        {/* {tags.map((tag, idx) => {
+        {/* {tagNames.map((tag, idx) => {
           return (
             <div key={idx} className={styles.tag}>
               {tag}
