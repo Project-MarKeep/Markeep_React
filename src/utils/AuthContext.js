@@ -41,9 +41,9 @@ export const AuthContextProvider = (props) => {
         console.log('토큰값 유효하지 않음!');
         alert('다시 로그인 해주세요!');
         localStorage.clear();
+        setLoading(false);
+        setIsLoggedIn(false);
       }
-      setLoading(false);
-      setIsLoggedIn(false);
     };
     testFunction();
     if (localStorage.getItem('isLoggedIn')) {
