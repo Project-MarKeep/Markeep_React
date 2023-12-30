@@ -2,10 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from '../../styles/CardPrivate.module.scss';
 import { Link, Outlet } from 'react-router-dom';
 
-const CardPrivate = ({ id, url, title, tags }) => {
+const CardPrivate = ({ id, url, title, tagNames }) => {
   const [active, setActive] = useState(false);
   const ref = useRef();
 
+  console.log('id, url, title, tagNames :', id, url, title, tagNames);
   const clickManageHandler = () => {
     setActive(true);
   };
@@ -41,7 +42,7 @@ const CardPrivate = ({ id, url, title, tags }) => {
           </div>
           <h4>{title}</h4>
           <div className={styles.tag_box}>
-            {tags.map((tag, idx) => {
+            {tagNames.map((tag, idx) => {
               return (
                 <div
                   key={idx}
@@ -63,7 +64,7 @@ const CardPrivate = ({ id, url, title, tags }) => {
       </div>
       {active && (
         <div className={styles.modal}>
-          {/* <Outlet context={{ id, url, title, tags, ref }} /> */}
+          <Outlet context={{ id, url, title, tagNames, ref }} />
         </div>
       )}
     </div>

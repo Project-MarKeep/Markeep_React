@@ -33,45 +33,57 @@ const Folders = () => {
       requestUri,
       // + '?page=' + `${pageNo}` + '&size=' + `${size}`
       {
-        headers: { Authorization: 'Bearer ' + token },
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
       }
     );
-
     console.log(res);
     const list = await res.json();
-
-    console.log('list: ', list);
     setFolderList(list);
   };
+  console.log('list잘 들어왔나확인', folderList);
 
   useEffect(() => {
     fetchMyFolderList();
     console.log('myFolderList: ', folderList);
   }, []);
 
-  const myPageList = (folderList) => {
-    return folderList.map((folder) => ({
-      id: folder.id,
-      title: folder.title,
-      folderImg: folder.folderImg,
-      hideFlag: folder.hideFlag,
-      tags: folder.tags,
-    }));
-  };
+  const folders = folderList.map((f) => ({
+    id: f.folder.id,
+    title: f.folder.title,
+    folderImg: f.folder.folderImg,
+    hideFlag: f.folder.hideFlag,
+    tagNames: f.folder.tagNames,
+  }));
+
+  console.log('folders', folders);
+
+  // const myPageList = (folderList) => {
+  //   return folderList.map((folder) => ({
+  //     id: folder.id,
+  //     title: folder.title,
+  //     folderImg: folder.folderImg,
+  //     hideFlag: folder.hideFlag,
+  //     tagNames: folder.tagNames,
+  //   }));
+  // };
 
   return (
     <div className={styles.wrap}>
       <div className={styles.group}>
         <h3>Public Folders</h3>
         <div className={styles.folders}></div>
-        {myPageList(folderList)
+        {folders
           .filter((f) => !f.hideFlag)
-          .map((folder) => {
+          .map((folder, idx) => {
             return (
-              <CardPublic
-                key={folder.id}
-                data={folder}
-                myPageFlag={true}
+              <CardPrivate
+                key={idx}
+                id={folder.id}
+                title={folder.title}
+                url={folder.folderImg}
+                tagNames={folder.tagNames}
               />
             );
           })}
@@ -79,14 +91,16 @@ const Folders = () => {
       <div className={styles.group}>
         <h3>Private Folders</h3>
         <div className={styles.folders}>
-          {myPageList(folderList)
+          {folders
             .filter((f) => f.hideFlag)
-            .map((folder) => {
+            .map((folder, idx) => {
               return (
                 <CardPrivate
-                  key={folder.id}
-                  data={folder}
-                  myPageFlag={true}
+                  key={idx}
+                  id={folder.id}
+                  title={folder.title}
+                  url={folder.folderImg}
+                  tagNames={folder.tagNames}
                 />
               );
             })}
