@@ -17,6 +17,9 @@ import CheckIcon from '@mui/icons-material/Check';
 import { API_BASE_URL as BASE, USER } from '../config/host-config';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../utils/AuthContext';
+import GoogleLoginBtn from './GoogleLoginBtn';
+import { KAKAO_AUTH_URL } from '../config/kakao-config';
+import { NAVER_AUTH_URL } from '../config/naver-config';
 
 const ModalJoin = () => {
   // useRef를 사용해서 태그 참조하기
@@ -184,7 +187,7 @@ const ModalJoin = () => {
       >
         <Grid
           container
-          spacing={2}
+          spacing={0}
         >
           <Grid
             item
@@ -195,7 +198,7 @@ const ModalJoin = () => {
               variant='outlined'
               fullWidth
               placeholder='Email'
-              margin='normal'
+              // margin='normal'
               onChange={onChangeHandler}
               InputProps={{
                 startAdornment: (
@@ -224,6 +227,7 @@ const ModalJoin = () => {
                   border: '1px solid #363636',
                   color: 'lightgray',
                   width: '80%',
+                  height: '45px',
                   margin: 'auto',
                   borderRadius: '20px',
                 },
@@ -274,6 +278,7 @@ const ModalJoin = () => {
                     border: '1px solid #363636',
                     color: 'lightgray',
                     width: '30%',
+                    height: '35px',
                     margin: '0 0 0 60%',
                     borderRadius: '20px',
                     // sx: { marginRight: '3em' },
@@ -309,6 +314,7 @@ const ModalJoin = () => {
                   border: '1px solid #363636',
                   color: 'lightgray',
                   width: '80%',
+                  height: '45px',
                   margin: 'auto',
                   borderRadius: '20px',
                 },
@@ -342,6 +348,7 @@ const ModalJoin = () => {
                   border: '1px solid #363636',
                   color: 'lightgray',
                   width: '80%',
+                  height: '45px',
                   margin: 'auto',
                   borderRadius: '20px',
                 },
@@ -359,9 +366,14 @@ const ModalJoin = () => {
         <Button
           variant='contained'
           color='primary'
-          sx={{ width: '20%', borderRadius: '30px', margin: '2em 17em' }}
+          sx={{
+            width: '18%',
+            borderRadius: '30px',
+            margin: '1em 11.5em',
+          }}
         >
-          Next <NavigateNextIcon fontSize='medium' />
+          NEXT
+          {/* <NavigateNextIcon fontSize='medium' /> */}
         </Button>
       </form>
 
@@ -373,28 +385,30 @@ const ModalJoin = () => {
       </Divider>
       <Box
         sx={{
-          width: '40%',
-          margin: '1em auto 3em',
+          width: '50%',
+          margin: '2em auto 2em',
           display: 'flex',
           flexGrow: 1,
           justifyContent: 'space-around',
         }}
       >
-        <img
-          src={require('../assets/img/kakao.png')}
-          alt='kakao'
-          className='sns-login-icon'
-        />
-        <img
-          src={require('../assets/img/naver_icon.png')}
-          alt='kakao'
-          className='sns-login-icon'
-        />
-        <img
-          src={require('../assets/img/google_icon.png')}
-          alt='kakao'
-          className='sns-login-icon'
-        />
+        <a href={KAKAO_AUTH_URL}>
+          <img
+            src={require('../assets/img/kakao.png')}
+            alt='kakao'
+            className='sns-login-icon'
+          />
+        </a>
+
+        <a href={NAVER_AUTH_URL}>
+          <img
+            src={require('../assets/img/naver_icon.png')}
+            alt='naver'
+            className='sns-login-icon'
+          />
+        </a>
+
+        <GoogleLoginBtn />
       </Box>
     </div>
   );
