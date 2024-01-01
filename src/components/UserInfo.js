@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from '../styles/UserInfo.module.scss';
 import { ReactComponent as Pencil } from '../assets/icons/pencil.svg';
 import { ReactComponent as Cancel } from '../assets/icons/x.svg';
@@ -13,37 +13,78 @@ const UserInfo = () => {
     email: 'greentea@google.com',
   };
 
+  const $fileTag = useRef();
+
+  // 닉네임 상태 설정
+  const [nick, setNick] = useState(
+    () => localStorage.getItem('nick') || user.nickname
+  );
+
+  // 프로필 이미지 URL 상태 설정
+  const [profileUrl, setProfileUrl] = useState(
+    () => localStorage.getItem('profileUrl') || user.profile
+  );
+
   const token = localStorage.getItem('ACCESS_TOKEN');
 
   const header = {
     'content-type': 'application/json',
-    authorization: 'Bearer ' + token,
+    Authorization: 'Bearer ' + token,
   };
 
+  // 닉네임 수정하기
   const requestUri = API_BASE_URL + USER + '/nickname?nickname=';
 
   const fetchPutNickname = async (newNickname) => {
     const res = await fetch(requestUri + newNickname, {
       method: 'PUT',
       headers: header,
-      // body: JSON.stringify({
-      //   nickname: newNickname,
-      // }),
     });
 
-    if (res.status == 200) {
+    if (res.status === 200) {
       console.log('닉네임 변경완료!');
       localStorage.setItem('nick', newNickname);
-      // setNick(res.text());
+      setNick(newNickname);
     } else {
       console.error('닉네임 변경실패');
     }
   };
 
+  // 프로필 사진 수정 요청
+  const fetchUpdateProfile = async () => {
+    const formData = new FormData();
+    formData.append('profileImage', $fileTag.current.files[0]);
+
+    const res = await fetch(API_BASE_URL + USER + '/profile', {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+      body: formData,
+    });
+
+    if (res.status === 200) {
+      console.log('프로필 사진 변경 완료!');
+      const newProfileUrl = await res.text();
+      console.log('New Profile URL:', newProfileUrl);
+
+      // 프로필 이미지 URL을 로컬 스토리지에 저장
+      localStorage.setItem('profileUrl', newProfileUrl);
+
+      // 변경된 프로필 이미지 URL로 상태 업데이트
+      setProfileUrl(newProfileUrl);
+    } else {
+      console.error('프로필 사진 변경 실패');
+    }
+  };
+
+  // 이미지 수정 핸들러
+  const ImageChangeHandler = () => {
+    fetchUpdateProfile();
+  };
+
+  // 닉네임 수정
   const [change, setChange] = useState(false);
-  const [nick, setNick] = useState(
-    () => localStorage.getItem('nick') || user.nickname
-  );
 
   const clickChangeHandler = () => {
     setChange(true);
@@ -60,7 +101,7 @@ const UserInfo = () => {
   };
 
   const clickCancelHandler = () => {
-    setNick(nick);
+    setNick(localStorage.getItem('nick') || user.nickname);
   };
 
   useEffect(() => {
@@ -72,7 +113,7 @@ const UserInfo = () => {
       <div className={styles.profile}>
         <div className={styles.img_box}>
           <img
-            src={user.profile}
+            src={profileUrl}
             alt='프로필 사진'
           />
         </div>
@@ -85,11 +126,10 @@ const UserInfo = () => {
             type='file'
             id='profile'
             style={{ display: 'none' }}
+            ref={$fileTag}
+            onChange={ImageChangeHandler}
           />
         </label>
-        {/* <div className={styles.icon_box}>
-          <Pencil className={styles.icon} />
-        </div> */}
       </div>
       <div>{user.email}</div>
       {!change ? (
@@ -126,8 +166,6 @@ const UserInfo = () => {
           </div>
         </div>
       )}
-
-      {/* <button>비밀번호 변경</button> */}
     </div>
   );
 };

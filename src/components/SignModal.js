@@ -18,22 +18,27 @@ import {
 import { styled } from '@mui/material/styles';
 import EmailIcon from '@mui/icons-material/Email';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Modal_Login from './ModalLogin';
 import ModalLogin from './ModalLogin';
 import ModalJoin from './ModalJoin';
+import ModalPassword from './ModalPassword';
 
 const SignModal = ({ status, handleClose }) => {
-  console.log('status: ', status);
   const [value, setValue] = useState('signIn');
-  console.log('useState value: ', value);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   useEffect(() => {
-    console.log('useEffect status: ', status);
-    status.value === 'Sign In' ? setValue('signIn') : setValue('signUp');
+    if (status.value === 'Sign In') {
+      setValue('signIn');
+    } else if (status.value === 'Sign Up') {
+      setValue('signUp');
+    } else {
+      setValue('password');
+      setShowForgotPassword(true);
+    }
   }, [status.value]);
 
   return (
@@ -44,6 +49,8 @@ const SignModal = ({ status, handleClose }) => {
         sx: {
           background: '#413a6f',
           borderRadius: '30px',
+          width: '400px',
+          overflowY: 'visible',
         },
       }}
     >
@@ -52,9 +59,9 @@ const SignModal = ({ status, handleClose }) => {
         onChange={handleChange}
         variant='fullWidth'
         sx={{
-          marginBottom: '2em',
+          marginBottom: '1em',
           '& .MuiTabs-indicator': {
-            backgroundColor: 'white', // 원하는 색상 코드로 변경
+            backgroundColor: 'white',
           },
         }}
       >
@@ -62,25 +69,49 @@ const SignModal = ({ status, handleClose }) => {
           label='Sign In'
           value='signIn'
           sx={{
-            '&.Mui-selected': { color: '#6ecbf5' }, // 선택됐을 때의 색상
+            '&.Mui-selected': { color: '#6ecbf5' },
             '&.Mui-focusVisible': {
               backgroundColor: 'rgba(100, 100, 100, 0.2)',
-            }, // 포커스 됐을 때의 배경색
+            },
           }}
         />
         <Tab
           label='Sign Up'
           value='signUp'
           sx={{
-            '&.Mui-selected': { color: '#6ecbf5' }, // 선택됐을 때의 색상
+            '&.Mui-selected': { color: '#6ecbf5' },
             '&.Mui-focusVisible': {
               backgroundColor: 'rgba(100, 100, 100, 0.2)',
-            }, // 포커스 됐을 때의 배경색
+            },
+          }}
+        />
+        <Tab
+          label='Password'
+          value='password'
+          sx={{
+            '&.Mui-selected': { color: '#6ecbf5' },
+            '&.Mui-focusVisible': {
+              backgroundColor: 'rgba(100, 100, 100, 0.2)',
+            },
           }}
         />
       </Tabs>
-      {value === 'signIn' && <ModalLogin />}
+
+      {value === 'signIn' && (
+        <ModalLogin
+          handleChange={handleChange}
+          setValue={(value) => setValue(value)}
+          setShowForgotPassword={(show) => setShowForgotPassword(show)}
+          showForgotPassword={showForgotPassword}
+        />
+      )}
       {value === 'signUp' && <ModalJoin />}
+      {value === 'password' && showForgotPassword && (
+        <ModalPassword
+          setValue={setValue}
+          setShowForgotPassword={setShowForgotPassword}
+        />
+      )}
     </Dialog>
   );
 };
