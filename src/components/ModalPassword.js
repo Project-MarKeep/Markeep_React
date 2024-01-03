@@ -169,7 +169,7 @@ const ModalPassword = ({ setValue }) => {
                     color: 'lightgray',
                     width: '50%',
                     height: '45px',
-                    margin: '0 0 0 40%',
+                    margin: '0 0 10% 40%',
                     borderRadius: '20px',
                   },
                 }}
@@ -256,23 +256,6 @@ const ModalPassword = ({ setValue }) => {
           )}
         </form>
       )}
-      <Divider
-        variant='middle'
-        sx={{ color: 'lightgray' }}
-      >
-        Or Connect With
-      </Divider>
-      <Box
-        sx={{
-          width: '40%',
-          margin: '1em auto 3em',
-          display: 'flex',
-          flexGrow: 1,
-          justifyContent: 'space-around',
-        }}
-      >
-        {/* SNS 로그인 아이콘들 */}
-      </Box>
     </div>
   );
 };

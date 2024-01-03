@@ -35,7 +35,7 @@ const ModalJoin = () => {
 
   const [code, setCode] = useState();
   const [checked, setChecked] = useState(false);
-  const [emailValue, setEmailValue] = useState();
+  const [emailValue, setEmailValue] = useState('');
 
   // 상태변수로 회원가입 입력값 관리
   const [userValue, setUserValue] = useState({
@@ -45,7 +45,7 @@ const ModalJoin = () => {
   });
 
   // 검증 메세지에 대한 상태변수 괸리
-  // 입력값과 메셎는 따로 상태 관리(메세지는 백엔드로 보내줄 필요 x)
+  // 입력값과 메세지는 따로 상태 관리(메세지는 백엔드로 보내줄 필요 x)
   // 메세지 영역이 각 입력창마다 있기 때문에 객체를 활용해서 한번에 관리.
   const [message, setMessage] = useState({
     email: '',
@@ -85,22 +85,13 @@ const ModalJoin = () => {
   };
 
   // 이메일 중복 체크, 이메일 인증 서버 통신 함수
-  const fetchDuplicateCheck = async (email) => {
+  const fetchDuplicateCheck = async () => {
     let msg = '';
     let flag = false;
 
-    const res = await fetch(API_BASE_URL + '/join?email=' + email);
+    const res = await fetch(API_BASE_URL + '/join?email=' + `${emailValue}`);
 
     if (res.status === 200) {
-      const json = await res.json();
-
-      if (json) {
-        msg = '이메일이 중복되었습니다.';
-      } else {
-        msg = '사용 가능한 이메일 입니다.';
-        flag = true;
-      }
-
       const code = res.text();
       console.log(code);
       setCode(code);
@@ -112,7 +103,7 @@ const ModalJoin = () => {
 
       saveInputState({
         key: 'email',
-        inputValue: email,
+        inputValue: `${emailValue}`,
         msg,
         flag,
       });
@@ -133,9 +124,6 @@ const ModalJoin = () => {
       msg = '이메일은 필수값 입니다!';
     } else if (!emailRegex.test(inputValue)) {
       msg = '이메일 형식이 올바르지 않습니다.';
-    } else {
-      // 이메일 중복 체크
-      fetchDuplicateCheck(inputValue);
     }
 
     saveInputState({
@@ -199,7 +187,7 @@ const ModalJoin = () => {
               fullWidth
               placeholder='Email'
               // margin='normal'
-              onChange={onChangeHandler}
+              onChange={emailHandler}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position='start'>
@@ -212,11 +200,10 @@ const ModalJoin = () => {
                       aria-label='toggle password visibility'
                       // onMouseDown={handleMouseDownPassword}
                       edge='end'
+                      onClick={fetchDuplicateCheck()}
                     >
                       {isDuplicateChecked ? (
-                        <CheckCircleIcon
-                          onClick={fetchDuplicateCheck(emailValue)}
-                        />
+                        <CheckCircleIcon />
                       ) : (
                         <CheckCircleOutlineIcon />
                       )}
@@ -268,8 +255,13 @@ const ModalJoin = () => {
 
                         edge='end'
                         onKeyDown={emailCheckHandler}
+                        sx={{
+                          padding: '10px',
+                          width: '70px',
+                          fontSize: '20px',
+                        }}
                       >
-                        {checked && <CheckIcon />}
+                        {checked && <CheckIcon />} 확인
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -277,9 +269,9 @@ const ModalJoin = () => {
                   style: {
                     border: '1px solid #363636',
                     color: 'lightgray',
-                    width: '30%',
-                    height: '35px',
-                    margin: '0 0 0 60%',
+                    width: '50%',
+                    height: '45px',
+                    margin: '0 0 0 40%',
                     borderRadius: '20px',
                     // sx: { marginRight: '3em' },
                   },
