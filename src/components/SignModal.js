@@ -85,24 +85,26 @@ const SignModal = ({ status, handleClose }) => {
             },
           }}
         />
-        <Tab
-          label='Password'
-          value='password'
-          sx={{
-            '&.Mui-selected': { color: '#6ecbf5' },
-            '&.Mui-focusVisible': {
-              backgroundColor: 'rgba(100, 100, 100, 0.2)',
-            },
-          }}
-        />
+        {value === 'password' ? (
+          <Tab
+            label='Password'
+            value='password'
+            sx={{
+              '&.Mui-selected': { color: '#6ecbf5' },
+              '&.Mui-focusVisible': {
+                backgroundColor: 'rgba(100, 100, 100, 0.2)',
+              },
+            }}
+          />
+        ) : null}
       </Tabs>
 
       {value === 'signIn' && (
         <ModalLogin
           handleChange={handleChange}
-          setValue={(value) => setValue(value)}
-          setShowForgotPassword={(show) => setShowForgotPassword(show)}
-          showForgotPassword={showForgotPassword}
+          setValue={setValue}
+          // setShowForgotPassword={(show) => setShowForgotPassword(show)}
+          // showForgotPassword={showForgotPassword}
         />
       )}
       {value === 'signUp' && <ModalJoin />}

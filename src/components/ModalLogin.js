@@ -92,9 +92,9 @@ const ModalLogin = ({ handleChange, setValue, setShowForgotPassword }) => {
   // forgot password 클릭시 이동
   const fpClickHandler = (event) => {
     event.preventDefault();
-    if (value !== 'passowrd') {
+    if (setValue !== 'password') {
       setValue('password');
-      setShowForgotPassword(true);
+      // setShowForgotPassword(true);
     }
   };
 
