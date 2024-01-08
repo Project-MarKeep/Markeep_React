@@ -261,6 +261,7 @@ const ModalLogin = ({
           variant='h10'
           align='center'
           margin='36px'
+          color={'lightGray'}
         >
           Don't have an account?{' '}
           <Link

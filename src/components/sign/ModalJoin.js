@@ -101,7 +101,7 @@ const ModalJoin = ({ setValue, handleClose }) => {
       saveInputState({
         key: 'email',
         userValue,
-        msg: '다시 입력해주세요.',
+        msg: '이미 가입된 이메일입니다.',
         flag,
       });
     }
