@@ -1,126 +1,124 @@
-import { FOLDER, SITE, USER } from '../config/host-config';
+import axios from 'axios';
+import { FOLDER } from '../config/host-config';
 
 const token = localStorage.getItem('ACCESS_TOKEN');
-const requestTokenHeader = {
-  'content-type': 'application/json',
-  Authorization: 'Bearer ' + token,
-};
-const requestHeader = {
-  'content-type': 'application/json',
-};
+
+const api = axios.create({
+  baseURL: FOLDER,
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + token,
+  },
+});
 
 // 폴더 목록 요청
 export async function getFolders(pageNo, size, keyword) {
   console.log('getFolders 함수 호출');
 
-  const res = await fetch(
-    `${FOLDER}/all?page=${pageNo}&size=${size}&keyword=${keyword}`,
-    { headers: requestTokenHeader }
-  );
-  const folders = await res.json();
-  console.log('folders: ', folders);
-  const list = await folders.list;
-  const page = await folders.pageInfo;
-  const count = await folders.count;
-  return { list, page, count };
+  try {
+    const res = await api.get('/all', {
+      params: {
+        page: pageNo,
+        size: size,
+        keyword: keyword,
+      },
+    });
+    return res.data;
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 // 내 폴더 목록 요청
 export async function getMyFolders() {
   console.log('getMyFolders 함수 호출!');
 
-  const res = await fetch(FOLDER + '/my', {
-    // console.log('getMyFolders 함수 호출!');
-    // const res = await fetch(`${FOLDER}/my`, {
-    headers: requestTokenHeader,
-  });
-  const folders = await res.json();
-  return await folders.map((f) => f.folder);
+  try {
+    const res = await api.get('/my');
+    return res.data.map((f) => f.folder);
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 // 내 폴더 검색 요청
 export async function searchMyFolders(keyword) {
   console.log('searchMyFolders 요청 들어옴!');
-  const res = await fetch(
-    `${FOLDER}/my/search?page=1&size=1&keyword=${keyword}`,
-    {
-      headers: requestTokenHeader,
-    }
-  );
-  const folders = await res.json();
-  return await folders.list;
+
+  try {
+    const res = await api.get('/my/search', {
+      params: {
+        page: 1,
+        size: 1,
+        keyword: keyword,
+      },
+    });
+    return res.data.list;
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 // 폴더 등록 요청
 export async function addFolder(formData) {
   console.log('addFolder 요청 들어옴!');
-  return await fetch(`${FOLDER}/my`, {
-    method: 'POST',
-    headers: {
-      Authorization: 'Bearer ' + token,
-    },
-    body: formData,
-  });
-}
 
-// 사이트 목록 요청
-export async function getSites(id) {
-  console.log('getSites 함수 호출!');
-
-  const res = await fetch(`${SITE}?folderId=${id}`, {
-    headers: requestTokenHeader,
-  });
-  return await res.json();
+  try {
+    const res = await axios.post(FOLDER + '/my', formData, {
+      headers: {
+        // 'Content-Type': 'multipart/form-data',
+        Authorization: 'Bearer ' + token,
+      },
+    });
+    return res.data;
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 // 폴더 삭제
 export async function deleteFolder(folderIds) {
   console.log('deleteFolder 요청 들어옴');
-  return await fetch(`${FOLDER}/my`, {
-    method: 'DELETE',
-    headers: requestTokenHeader,
-    body: JSON.stringify({ ids: folderIds }),
-  });
-}
 
-// 북마크 추가
-export async function addSite(folderId, title, url, comment) {
-  console.log('addSite 함수 호출!');
-  return await fetch(SITE, {
-    method: 'POST',
-    headers: requestTokenHeader,
-    body: JSON.stringify({
-      folderId: folderId,
-      siteName: title,
-      url: url,
-      comment: comment,
-    }),
-  });
+  try {
+    const res = api.delete('/my/ids', { data: { ids: folderIds } });
+    // return res.data;
+    return res;
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 // 폴더 수정 요청
 export const updateFolder = async (formData) => {
-  return await fetch(FOLDER + '/my', {
-    method: 'PUT',
-    headers: requestTokenHeader,
-    body: JSON.stringify(formData),
-  });
+  console.log('updateFolder 요청 들어옴!');
+
+  try {
+    const res = await axios.put(FOLDER + '/my', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: 'Bearer ' + token,
+      },
+    });
+    return res.data;
+  } catch (e) {
+    console.error(e);
+  }
 };
 
 // 폴더 핀 요청
 export const addFolderPin = async (folderId) => {
-  const res = await fetch(FOLDER + `/pin?folderId=` + folderId, {
-    method: 'POST',
-    headers: requestTokenHeader,
-  });
+  console.log('addFolderPin 요청 들어옴!');
 
-  if (res.status === 200) {
-    const folder = await res.json(); // FolderResponseDTO
-    return folder;
-  }
-  if (res.status === 400) {
-    const message = await res.text(); // "미가입 회원입니다."
-    return message;
+  try {
+    const res = api.post('/pin', {
+      params: {
+        folderId: folderId,
+      },
+    });
+    return res.data;
+  } catch (e) {
+    console.error(e);
   }
 };
 

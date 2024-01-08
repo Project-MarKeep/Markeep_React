@@ -1,52 +1,59 @@
-import { FOLDER, SITE, USER } from '../config/host-config';
+import axios from 'axios';
+import { USER } from '../config/host-config';
 
 const token = localStorage.getItem('ACCESS_TOKEN');
-const requestTokenHeader = {
-  'content-type': 'application/json',
-  Authorization: 'Bearer ' + token,
-};
-const requestHeader = {
-  'content-type': 'application/json',
-};
+const api = axios.create({
+  baseURL: USER,
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + token,
+  },
+});
 
 // 프로필 조회
 export async function getProfile() {
-  const res = await fetch(USER + '/profile', {
-    headers: requestTokenHeader,
-  });
-  return await res.json();
+  console.log('getProfile 요청 들어옴!');
+
+  try {
+    const res = await api.get('/profile');
+    return res.data;
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 // 프로필 사진 수정 요청
-export const fetchUpdateProfile = async (file) => {
+export async function updateProfile(file) {
+  console.log('updateProfile 요청 들어옴!');
+
   const formData = new FormData();
   formData.append('profileImage', file);
 
-  const res = await fetch(USER + '/profile', {
-    method: 'POST',
-    headers: {
-      Authorization: 'Bearer ' + token,
-    },
-    body: formData,
-  });
-
-  if (res.status === 200) {
-    console.log('프로필 사진 변경 완료!: ');
-    return await res.text();
-  } else {
-    console.error('프로필 사진 변경 실패');
+  try {
+    const res = await axios.post(USER + '/profile', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: 'Bearer ' + token,
+      },
+    });
+    return res.data;
+  } catch (e) {
+    console.error(e);
   }
-};
+}
 
-export const fetchPutNickname = async (newNickname) => {
-  const res = await fetch(USER + '/nickname?nickname=' + newNickname, {
-    method: 'PUT',
-    headers: requestTokenHeader,
-  });
+// 닉네임 수정 요청
+export async function updateNickname(newNickname) {
+  console.log('updateNickname 요청 들어옴');
 
-  if (res.status === 200) {
-    return await res;
-  } else {
-    console.error('닉네임 변경실패');
+  try {
+    const res = await api.put('/nickname', {
+      params: {
+        nickname: newNickname,
+      },
+    });
+    return res.data;
+  } catch (e) {
+    console.error(e);
   }
-};
+}

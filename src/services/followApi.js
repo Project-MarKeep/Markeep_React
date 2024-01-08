@@ -1,20 +1,24 @@
-import { FOLDER, SITE, USER, FOLLOW } from '../config/host-config';
+import axios from 'axios';
+import { FOLLOW } from '../config/host-config';
 
 const token = localStorage.getItem('ACCESS_TOKEN');
-const requestTokenHeader = {
-  'content-type': 'application/json',
-  Authorization: 'Bearer ' + token,
-};
-const requestHeader = {
-  'content-type': 'application/json',
-};
 
-export const follow = async (toId) => {
-  const res = await fetch(FOLLOW + `?toId=` + toId, {
-    method: 'POST',
-    headers: requestTokenHeader,
-  });
+const api = axios.create({
+  baseURL: FOLLOW,
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + token,
+  },
+});
 
-  if (res.status === 200) {
+export async function follow(toId) {
+  console.log('follow 요청 들어옴!');
+  try {
+    const res = await api.post({
+      params: { toId: toId },
+    });
+    return res.data;
+  } catch (e) {
+    console.error(e);
   }
-};
+}

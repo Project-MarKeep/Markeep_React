@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from "react";
-import styles from "../../styles/MyFolders.module.scss";
-import Loading from "../../components/ui/Loading";
-import { getMyFolders } from "../../services/folderApi";
-import { Link, useLocation } from "react-router-dom";
+import styles from '../../styles/MyFolders.module.scss';
+import Loading from '../../components/ui/Loading';
+import { getMyFolders } from '../../services/folderApi';
+import { Link, useLocation } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import ErrorPage from '../../components/ui/ErrorPage';
 
 const MyFolders = () => {
   const location = useLocation();
-  const [folders, setFolders] = useState();
-
-  useEffect(() => {
-    getMyFolders().then((res) => setFolders(res));
-  }, []);
-
-  if (!folders) {
-    return <Loading />;
-  }
+  const { isLoading, isError, error, data } = useQuery({
+    queryKey: ['myFolders'],
+    queryFn: () => {
+      return getMyFolders();
+    },
+  });
+  if (isLoading) return <Loading />;
+  if (isError) return <ErrorPage>{error}</ErrorPage>;
 
   return (
     <>
       <h2 className={styles.title}>내 폴더 목록</h2>
       <div className={styles.list}>
         <ul>
-          {folders.map((f) => (
+          {data.map((f) => (
             <li key={f.id}>
               <Link
                 to={`/view/folders/${f.id}`}

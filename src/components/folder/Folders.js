@@ -3,21 +3,20 @@ import styles from '../../styles/Folders.module.scss';
 import { getMyFolders, searchMyFolders } from '../../services/folderApi';
 import CardPrivate from './CardPrivate';
 import Loading from '../ui/Loading';
+import { useQuery } from '@tanstack/react-query';
+import ErrorPage from '../ui/ErrorPage';
 
 const Folders = ({ option, keyword, setChecked }) => {
-  const [folders, setFolders] = useState();
+  console.log('keyword: ', keyword);
 
-  useEffect(() => {
-    if (keyword) {
-      searchMyFolders(keyword).then((res) => setFolders(res));
-      return;
-    }
-    getMyFolders().then((res) => setFolders(res));
-  }, [keyword]);
-
-  if (!folders) {
-    return <Loading />;
-  }
+  const { isLoading, isError, error, data } = useQuery({
+    queryKey: ['myFolders'],
+    queryFn: () => {
+      return getMyFolders();
+    },
+  });
+  if (isLoading) return <Loading />;
+  if (isError) return <ErrorPage>{error}</ErrorPage>;
 
   return (
     <div className={styles.wrap}>
@@ -25,7 +24,7 @@ const Folders = ({ option, keyword, setChecked }) => {
         <div className={styles.group}>
           <h3>Public Folders</h3>
           <div className={styles.folders}>
-            {folders
+            {data
               .filter((f) => !f.hideFlag)
               .map((f) => {
                 return (
@@ -47,7 +46,7 @@ const Folders = ({ option, keyword, setChecked }) => {
         <div className={styles.group}>
           <h3>Private Folders</h3>
           <div className={styles.folders}>
-            {folders
+            {data
               .filter((f) => f.hideFlag)
               .map((f) => {
                 return (

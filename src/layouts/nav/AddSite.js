@@ -1,19 +1,22 @@
-import { useEffect, useRef, useState } from "react";
-import { addSite, getMyFolders } from "../../services/folderApi";
-import styles from "../../styles/AddSite.module.scss";
-import Select from "react-select";
-import { colors, customStyles } from "../../styles/customStyles";
-import Input from "../../components/ui/Input";
-import { ReactComponent as AddIcon } from "../../assets/icons/plus.svg";
-import AsyncCreatableSelect from "react-select/async-creatable";
+import { useEffect, useRef, useState } from 'react';
+import styles from '../../styles/AddSite.module.scss';
+import Select from 'react-select';
+import { colors, customStyles } from '../../styles/customStyles';
+import Input from '../../components/ui/Input';
+import { ReactComponent as AddIcon } from '../../assets/icons/plus.svg';
+import { getMyFolders } from '../../services/folderApi';
+import { addSite } from '../../services/siteApi';
+import { useQuery } from '@tanstack/react-query';
+import Loading from '../../components/ui/Loading';
+import ErrorPage from '../../components/ui/ErrorPage';
 
 const Add = () => {
   // 데이터 상태 관리
   const initialState = {
-    folderId: "",
-    title: "",
-    url: "",
-    comment: "",
+    folderId: '',
+    title: '',
+    url: '',
+    comment: '',
     active: false,
     isValidUrl: false,
   };
@@ -22,8 +25,8 @@ const Add = () => {
 
   // 입력 검사 상태
   const [checkMsg, setCheckMsg] = useState({
-    title: "",
-    url: "",
+    title: '',
+    url: '',
   });
 
   const { folderId, title, url, comment, active, isValidUrl } = selected;
@@ -50,18 +53,18 @@ const Add = () => {
   };
 
   // 내 폴더 목록 요청
-  const [folders, setFolders] = useState();
 
-  useEffect(() => {
-    getMyFolders().then((res) => setFolders(res));
-  }, []);
-
-  if (!folders) {
-    return <div></div>;
-  }
+  const { isLoading, isError, error, data } = useQuery({
+    queryKey: ['myFolders'],
+    queryFn: () => {
+      return getMyFolders();
+    },
+  });
+  if (isLoading) return <Loading />;
+  if (isError) return <ErrorPage>{error}</ErrorPage>;
 
   // 폴더를 셀렉트 옵션으로 변환.
-  const options = folders.map((f) => ({ value: f.id, label: f.title }));
+  const options = data.map((f) => ({ value: f.id, label: f.title }));
 
   // 셀렉트 폴더 저장
   const handleSelectChange = (e) => {
@@ -73,12 +76,12 @@ const Add = () => {
     if (!title) {
       setCheckMsg((prev) => ({
         ...prev,
-        title: "북마크 이름을 입력해 주세요.",
+        title: '북마크 이름을 입력해 주세요.',
       }));
       titleRef.current.focus();
       return;
     }
-    setCheckMsg((prev) => ({ ...prev, title: "" }));
+    setCheckMsg((prev) => ({ ...prev, title: '' }));
   };
 
   // url 유효성 검사
@@ -89,12 +92,12 @@ const Add = () => {
     if (!urlRegex.test(e.target.value)) {
       setCheckMsg((prev) => ({
         ...prev,
-        url: "url 형식을 다시 확인해 주세요",
+        url: 'url 형식을 다시 확인해 주세요',
       }));
       setSelected((prev) => ({ ...prev, isValidUrl: false }));
       return;
     }
-    setCheckMsg((prev) => ({ ...prev, url: "" }));
+    setCheckMsg((prev) => ({ ...prev, url: '' }));
     setSelected((prev) => ({ ...prev, isValidUrl: true }));
   };
 
@@ -107,36 +110,29 @@ const Add = () => {
   // 북마크 추가 요청
   const handleAddClick = () => {
     addSite(folderId, title, url, comment).then((res) => {
-      console.log("res", res.status);
-      if (res.status === 200) {
-        alert("북마크 등록 성공!");
-        setSelected(initialState);
-        selectRef.current.clearValue();
-        return;
-      }
-      alert("북마크 등록에 실패했습니다.");
+      console.log('res', res);
     });
   };
 
   return (
     <div className={styles.wrapper}>
       <Select
-        id="select"
+        id='select'
         ref={selectRef}
         autoFocus
         isClearable={true}
         isSearchable={true}
-        placeholder={"폴더 선택"}
+        placeholder={'폴더 선택'}
         options={options}
         onChange={handleSelectChange}
-        maxMenuHeight={"160px"}
+        maxMenuHeight={'160px'}
         styles={customStyles}
         theme={(theme) => ({
           ...theme,
           colors: {
             ...theme.colors,
 
-            neutral20: "rgba(187, 180, 254, 0.4)",
+            neutral20: 'rgba(187, 180, 254, 0.4)',
             primary: colors.purple,
             neutral80: colors.white,
             neutral60: colors.blue,
@@ -146,10 +142,10 @@ const Add = () => {
       <div className={styles.search}>
         <Input>
           <input
-            id="title"
-            type="text"
-            name="title"
-            placeholder="북마크 이름"
+            id='title'
+            type='text'
+            name='title'
+            placeholder='북마크 이름'
             value={title}
             onChange={handleChange}
             onBlur={handleTitleBlur}
@@ -160,10 +156,10 @@ const Add = () => {
       <div className={styles.search}>
         <Input>
           <input
-            id="url"
-            type="text"
-            name="url"
-            placeholder="북마크 주소"
+            id='url'
+            type='text'
+            name='url'
+            placeholder='북마크 주소'
             value={url}
             onChange={handleChange}
             onKeyUp={handleUrlKeyUp}
@@ -175,10 +171,10 @@ const Add = () => {
       <div className={styles.search}>
         <Input>
           <input
-            id="comment"
-            type="text"
-            name="comment"
-            placeholder="북마크 코멘트"
+            id='comment'
+            type='text'
+            name='comment'
+            placeholder='북마크 코멘트'
             value={comment}
             onChange={handleChange}
           />

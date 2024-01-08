@@ -4,35 +4,55 @@ import { ReactComponent as Pencil } from '../../assets/icons/pencil.svg';
 import { ReactComponent as Cancel } from '../../assets/icons/x.svg';
 import { ReactComponent as Check } from '../../assets/icons/check.svg';
 import {
-  fetchPutNickname,
-  fetchUpdateProfile,
   getProfile,
+  updateNickname,
+  updateProfile,
 } from '../../services/userApi';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import Loading from '../../components/ui/Loading';
+import ErrorPage from '../../components/ui/ErrorPage';
 
 const UserInfo = () => {
-  const [profile, setProfile] = useState();
   const [change, setChange] = useState(false);
   const [nick, setNick] = useState('');
+  const queryClient = useQueryClient();
 
   const $fileTag = useRef();
 
-  useEffect(() => {
-    getProfile().then((res) => setProfile(res));
-  }, [$fileTag, nick]);
+  const { isLoading, isError, error, data } = useQuery({
+    queryKey: ['profile'],
+    queryFn: () => {
+      return getProfile();
+    },
+  });
 
-  if (!profile) {
-    return <div></div>;
-  }
+  const { mutate: updateImage } = useMutation({
+    mutationFn: updateProfile,
+    onSuccess: () => {
+      queryClient.invalidateQueries('profile');
+    },
+    onError: () => {
+      console.error('에러');
+    },
+  });
 
-  console.log('profile: ', profile);
+  const { mutate: updateName } = useMutation({
+    mutationFn: updateNickname,
+    onSuccess: () => {
+      queryClient.invalidateQueries('profile');
+    },
+    onError: () => {
+      console.error('에러');
+    },
+  });
 
-  const { profileImage, nickname, email, followerCount, followingCount } =
-    profile;
+  if (isLoading) return <Loading />;
+  if (isError) return <ErrorPage>{error}</ErrorPage>;
+
+  const { profileImage, nickname, email, followerCount, followingCount } = data;
 
   const ImageChangeHandler = () => {
-    fetchUpdateProfile($fileTag.current.files[0]).then((res) =>
-      setProfile((prev) => ({ ...prev, profileImage: res }))
-    );
+    updateImage($fileTag.current.files[0]);
   };
 
   const clickChangeHandler = () => {
@@ -40,8 +60,8 @@ const UserInfo = () => {
   };
 
   const clickSaveHandler = () => {
+    updateName(nick);
     setChange(false);
-    fetchPutNickname(nick).then((res) => setNick(nick));
     setNick('');
   };
 
