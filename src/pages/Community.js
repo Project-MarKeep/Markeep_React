@@ -1,42 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/Community.module.scss';
 import CardPublic from '../components/folder/CardPublic';
-import { addFolderPin, getFolders } from '../services/folderApi';
 import Loading from '../components/ui/Loading';
-import { follow } from '../services/followApi';
-import { useNavigate, Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { getFolders } from '../services/folderApi';
+import ErrorPage from '../components/ui/ErrorPage';
 
 const Community = () => {
-  const redirection = useNavigate();
-
-  //폴더 요청
-  const [folderInfo, setFolderInfo] = useState();
-  const [clickFollow, setClickFollow] = useState('');
-
-  const pageNo = 1;
-  const size = 20;
-
-  useEffect(() => {
-    getFolders(pageNo, size, '').then((res) => setFolderInfo(res));
-  }, []);
-
-  useEffect(() => {
-    follow(clickFollow);
-  }, [clickFollow]);
-
-  if (!folderInfo) {
-    return <Loading />;
-  }
-
-  const { list, pageInfo, count } = folderInfo;
-
-  console.log('list 확인: ', list);
-  console.log(
-    'followFlag 확인',
-
-    list.map((l) => [l.id, l.userId, l.followFlag])
-  );
-
+  const { isLoading, isError, error, data } = useQuery({
+    queryKey: ['folders'],
+    queryFn: () => {
+      return getFolders(1, 20, '');
+    },
+  });
+  if (isLoading) return <Loading />;
+  if (isError) return <ErrorPage>{error}</ErrorPage>;
+  const { list } = data;
+  list.map((l) => [l.id, l.userId, l.followFlag]);
   return (
     <div className={styles.wrapper}>
       <h2>Community</h2>
@@ -54,7 +34,6 @@ const Community = () => {
             isFollowed={f.followFlag}
             pin={f.pinCount}
             toId={f.userId}
-            setClickFollow={setClickFollow}
           />
         ))}
       </div>

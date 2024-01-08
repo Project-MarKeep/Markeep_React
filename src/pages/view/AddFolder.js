@@ -92,19 +92,7 @@ const AddFolder = () => {
     folderFormData.append('dto', blob);
     folderFormData.append('folderImage', image);
     try {
-      addFolder(folderFormData).then((res) => {
-        if (res.status === 200) {
-          alert('폴더가 정상적으로 등록되었습니다.');
-          setFormData(initialState);
-          setSrc();
-          navigate('/mypage');
-          return;
-        }
-        alert('폴더 생성에 실패했습니다. 다시 시도해 주세요.');
-        setFormData(initialState);
-        setSrc();
-        navigate('/mypage');
-      });
+      addFolder(folderFormData).then((res) => {});
     } catch (e) {
       console.log(e);
     }
@@ -159,7 +147,6 @@ const AddFolder = () => {
           )}
         </Input>
       </div>
-
       {/* 태그 */}
       <div className={styles.tag_box}>
         <div className={styles.input_box}>

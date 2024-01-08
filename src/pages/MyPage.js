@@ -7,7 +7,8 @@ import Select from 'react-select';
 import { colors, customStyles } from '../styles/customStyles';
 import { useInput } from '../hoc/useInput';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { deleteFolder } from '../services/folderApi';
+import { deleteFolder, searchMyFolders } from '../services/folderApi';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 const MyPage = () => {
   const [search, setSearch] = useState('');
@@ -15,6 +16,18 @@ const MyPage = () => {
   const [checked, setChecked] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
+
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation({
+    mutationFn: deleteFolder,
+    onSuccess: () => {
+      queryClient.invalidateQueries('myFolders');
+    },
+    onError: () => {
+      console.error('에러');
+    },
+  });
 
   // 검색
   const handleClick = () => {
@@ -45,17 +58,8 @@ const MyPage = () => {
 
   // 폴더 삭제
   const handleCancleClick = (e) => {
-    console.log('잘 왔나 확인', checked);
-    deleteFolder(checked).then((res) => {
-      if (res.status === 200) {
-        alert('폴더가 삭제되었습니다.');
-        setChecked([]);
-        navigate('/mypage');
-        return;
-      }
-      alert('폴더 삭제에 실패했습니다. 다시 시도해 주세요.');
-      setChecked([]);
-    });
+    mutate(checked);
+    setChecked([]);
   };
 
   return (
