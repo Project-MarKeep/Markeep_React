@@ -1,14 +1,15 @@
-@import "variables", "mixin";
+@import 'variables', 'mixin';
 
 .wrap {
   .title {
     input {
       font-size: 14px;
-      margin-top: 1px;
+      margin: 7px;
       border: 2px solid $blue04;
       border-radius: 4px;
-      font-family: "Noto-l";
+      font-family: 'Noto-l';
       background: $black;
+      width: 95%;
 
       &::placeholder {
         color: $blue;
@@ -21,15 +22,22 @@
       }
     }
   }
+
+  .private {
+    margin-left: 10px;
+    width: 100px;
+  }
+
   .tag_box {
     .input_box {
       input {
         font-size: 14px;
-        margin-top: 1px;
+        margin: 7px;
         border: 2px solid $blue04;
         border-radius: 4px;
-        font-family: "Noto-l";
+        font-family: 'Noto-l';
         background: $black;
+        width: 95%;
 
         &::placeholder {
           color: $blue;
@@ -42,5 +50,26 @@
         }
       }
     }
+  }
+  .button {
+    margin-left: 10px;
+    cursor: pointer;
+
+    &:hover {
+    }
+
+    .icon {
+      color: white;
+      fill: white;
+      margin-top: 10px;
+    }
+  }
+
+  .plus {
+    float: inline-end;
+    position: relative;
+    right: 5px;
+    top: 170px;
+    border-radius: 7px;
   }
 }

@@ -23,7 +23,15 @@ const Folders = ({ option, keyword, setChecked }) => {
     <div className={styles.wrap}>
       {(option === 'all' || option === 'public') && (
         <div className={styles.group}>
-          <h3>Public Folders</h3>
+          <h3>
+            Public Folders
+            <input
+              type='button'
+              className={styles.button}
+              value='to Private'
+            />
+          </h3>
+
           <div className={styles.folders}>
             {folders
               .filter((f) => !f.hideFlag)
@@ -45,7 +53,14 @@ const Folders = ({ option, keyword, setChecked }) => {
       )}
       {(option === 'all' || option === 'private') && (
         <div className={styles.group}>
-          <h3>Private Folders</h3>
+          <h3>
+            Private Folders
+            <input
+              type='button'
+              className={styles.button}
+              value='to Public'
+            />
+          </h3>
           <div className={styles.folders}>
             {folders
               .filter((f) => f.hideFlag)

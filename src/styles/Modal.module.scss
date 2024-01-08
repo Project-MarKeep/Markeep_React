@@ -1,4 +1,4 @@
-@import "variables", "mixin";
+@import 'variables', 'mixin';
 
 .background {
   position: absolute;
@@ -14,8 +14,8 @@
 }
 
 .modal {
-  width: 420px;
-  height: 580px;
+  width: 280px;
+  height: 400px;
   border-radius: 16px;
   box-sizing: border-box;
   position: relative;

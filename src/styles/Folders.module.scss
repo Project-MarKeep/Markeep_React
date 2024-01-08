@@ -1,4 +1,4 @@
-@import "variables", "mixin";
+@import 'variables', 'mixin';
 
 .wrap {
   width: 100%;
@@ -21,6 +21,14 @@
       color: $white;
       font-family: Urban-m;
       font-weight: 500;
+
+      .button {
+        width: 100px;
+        height: 30px;
+        position: relative;
+        left: 1050px;
+        font-size: medium;
+      }
     }
 
     .folders {

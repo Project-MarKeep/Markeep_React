@@ -1,17 +1,17 @@
-import styles from "../styles/Mypage.module.scss";
-import React, { useState } from "react";
-import { ReactComponent as SearchIcon } from "../assets/icons/search.svg";
-import { ReactComponent as Cancel } from "../assets/icons/x.svg";
-import Folders from "../components/folder/Folders";
-import Select from "react-select";
-import { colors, customStyles } from "../styles/customStyles";
-import { useInput } from "../hoc/useInput";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { deleteFolder } from "../services/folderApi";
+import styles from '../styles/Mypage.module.scss';
+import React, { useState } from 'react';
+import { ReactComponent as SearchIcon } from '../assets/icons/search.svg';
+import { ReactComponent as Cancel } from '../assets/icons/x.svg';
+import Folders from '../components/folder/Folders';
+import Select from 'react-select';
+import { colors, customStyles } from '../styles/customStyles';
+import { useInput } from '../hoc/useInput';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { deleteFolder } from '../services/folderApi';
 
 const MyPage = () => {
-  const [search, setSearch] = useState("");
-  const [option, setOption] = useState("all");
+  const [search, setSearch] = useState('');
+  const [option, setOption] = useState('all');
   const [checked, setChecked] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
@@ -28,30 +28,32 @@ const MyPage = () => {
     handleInputChange,
     HandleCancelClick,
     handleKeyDown,
-  } = useInput("", handleClick);
+  } = useInput('', handleClick);
 
   // 폴더 분류
   const options = [
-    { value: "all", label: "All" },
-    { value: "public", label: "Public" },
-    { value: "private", label: "Private" },
+    { value: 'all', label: 'All' },
+    { value: 'public', label: 'Public' },
+    { value: 'private', label: 'Private' },
   ];
 
   const handleSelectChange = (e) => {
     setOption(e?.value);
   };
 
+  const handleMoveClick = (e) => {};
+
   // 폴더 삭제
   const handleCancleClick = (e) => {
-    console.log("잘 왔나 확인", checked);
+    console.log('잘 왔나 확인', checked);
     deleteFolder(checked).then((res) => {
       if (res.status === 200) {
-        alert("폴더가 삭제되었습니다.");
+        alert('폴더가 삭제되었습니다.');
         setChecked([]);
-        navigate("/mypage");
+        navigate('/mypage');
         return;
       }
-      alert("폴더 삭제에 실패했습니다. 다시 시도해 주세요.");
+      alert('폴더 삭제에 실패했습니다. 다시 시도해 주세요.');
       setChecked([]);
     });
   };
@@ -63,18 +65,18 @@ const MyPage = () => {
         <div className={styles.box}>
           <Select
             className={styles.select}
-            id="select"
-            defaultValue={{ value: "all", label: "All" }}
+            id='select'
+            defaultValue={{ value: 'all', label: 'All' }}
             options={options}
             onChange={handleSelectChange}
-            maxMenuHeight={"160px"}
+            maxMenuHeight={'160px'}
             styles={customStyles}
             theme={(theme) => ({
               ...theme,
               colors: {
                 ...theme.colors,
 
-                neutral20: "rgba(187, 180, 254, 0.4)",
+                neutral20: 'rgba(187, 180, 254, 0.4)',
                 primary: colors.purple,
                 neutral80: colors.white,
                 neutral60: colors.blue,
@@ -83,36 +85,47 @@ const MyPage = () => {
           />
           <div className={styles.input_box}>
             <input
-              placeholder="내 폴더 검색"
+              placeholder='내 폴더 검색'
               onChange={handleInputChange}
               value={keyword}
               onKeyDown={handleKeyDown}
               ref={inputRef}
             />
             {keyword ? (
-              <div className={styles.cancel} onClick={HandleCancelClick}>
-                <Cancel className={styles.icon} />
+              <div
+                className={styles.cancel}
+                onClick={HandleCancelClick}
+              >
+                <Cancel className={styles.cancel} />
               </div>
             ) : null}
-            <div className={styles.search} onClick={handleClick}>
-              <SearchIcon className={styles.icon} />
+            <div
+              className={styles.search}
+              onClick={handleClick}
+            >
+              <SearchIcon className={styles.search} />
             </div>
           </div>
           <div className={styles.buttons}>
             <div className={styles.link}>
               <Link
-                to={"/view/public/folders/add"}
+                to={'/view/public/folders/add'}
                 state={{ previousLocation: location }}
               >
-                추가
+                폴더 추가
               </Link>
             </div>
-            <button onClick={handleCancleClick}>삭제</button>
+            <button onClick={handleMoveClick}>폴더 이동</button>
+            <button onClick={handleCancleClick}>폴더 삭제</button>
           </div>
         </div>
       </div>
       <div className={styles.content}>
-        <Folders option={option} keyword={search} setChecked={setChecked} />
+        <Folders
+          option={option}
+          keyword={search}
+          setChecked={setChecked}
+        />
       </div>
     </div>
   );

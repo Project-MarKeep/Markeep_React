@@ -46,7 +46,7 @@ const SignModal = ({ status, handleClose }) => {
       onClose={handleClose}
       PaperProps={{
         sx: {
-          background: '#413a6f',
+          background: '#0B0312',
           borderRadius: '30px',
           width: '400px',
         },

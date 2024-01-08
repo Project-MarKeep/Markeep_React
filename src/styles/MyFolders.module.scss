@@ -21,13 +21,32 @@
 
     li {
       display: block;
-      margin: 0 4px;
+      margin: 0 1px;
       white-space: nowrap;
       height: 1.2rem;
       overflow: hidden;
       text-overflow: ellipsis;
       line-height: 1.2rem;
       text-align: center;
+      border: 1px inset $blue04;
+      // border-radius: 10px;
+      // border-top: none;
+      // border-left: none;
+      // border-right: none;
+      border-style: inset;
+      // border-width: 3px;
+      // border-start-end-radius: 10px;
+      // border-bottom: none;
+
+      &::placeholder {
+        color: $blue;
+        opacity: 0.4;
+      }
+
+      &:hover,
+      &:focus {
+        @include border($s: $salmon, $e: $purple);
+      }
       &:hover {
         color: $white;
       }

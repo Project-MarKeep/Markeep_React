@@ -330,10 +330,11 @@ const ModalJoin = ({ setValue, handleClose }) => {
                 style: {
                   border: '1px solid #363636',
                   color: 'lightgray',
-                  width: '85%',
+                  width: '80%',
                   height: '45px',
                   margin: 'auto',
                   borderra: '20px',
+                  borderRadius: '10px',
                 },
               }}
               sx={{
@@ -356,7 +357,7 @@ const ModalJoin = ({ setValue, handleClose }) => {
                       width: '80%',
                       height: '10px',
                       margin: 'auto',
-                      borderRadius: '20px',
+                      borderRadius: '10px',
                       cursor: 'none',
                     }
                   : {
@@ -406,7 +407,7 @@ const ModalJoin = ({ setValue, handleClose }) => {
                     width: '30%',
                     height: '35px',
                     margin: '0 0 0 60%',
-                    borderRadius: '20px',
+                    borderRadius: '10px',
                     // sx: { marginRight: '3em' },
                   },
                 }}
@@ -443,7 +444,7 @@ const ModalJoin = ({ setValue, handleClose }) => {
                   width: '80%',
                   height: '45px',
                   margin: 'auto',
-                  borderRadius: '20px',
+                  borderRadius: '10px',
                 },
               }}
               sx={{
@@ -462,7 +463,7 @@ const ModalJoin = ({ setValue, handleClose }) => {
                       width: '80%',
                       height: '10px',
                       margin: 'auto',
-                      borderRadius: '20px',
+                      borderRadius: '10px',
                       cursor: 'none',
                     }
                   : {
@@ -470,7 +471,7 @@ const ModalJoin = ({ setValue, handleClose }) => {
                       width: '80%',
                       height: '10px',
                       margin: 'auto',
-                      borderRadius: '20px',
+                      borderRadius: '10px',
                       cursor: 'none',
                     }
               }
@@ -501,7 +502,7 @@ const ModalJoin = ({ setValue, handleClose }) => {
                   width: '80%',
                   height: '45px',
                   margin: 'auto',
-                  borderRadius: '20px',
+                  borderRadius: '10px',
                 },
               }}
               sx={{
@@ -520,14 +521,14 @@ const ModalJoin = ({ setValue, handleClose }) => {
                       width: '80%',
                       height: '10px',
                       margin: 'auto',
-                      borderRadius: '20px',
+                      borderRadius: '10px',
                     }
                   : {
                       color: 'red',
                       width: '80%',
                       height: '10px',
                       margin: 'auto',
-                      borderRadius: '20px',
+                      borderRadius: '10px',
                     }
               }
             >
@@ -557,7 +558,7 @@ const ModalJoin = ({ setValue, handleClose }) => {
                   width: '80%',
                   height: '45px',
                   margin: 'auto',
-                  borderRadius: '20px',
+                  borderRadius: '10px',
                 },
               }}
               sx={{
@@ -576,14 +577,14 @@ const ModalJoin = ({ setValue, handleClose }) => {
                       width: '80%',
                       height: '10px',
                       margin: 'auto',
-                      borderRadius: '20px',
+                      borderRadius: '10px',
                     }
                   : {
                       color: 'red',
                       width: '80%',
                       height: '10px',
                       margin: 'auto',
-                      borderRadius: '20px',
+                      borderRadius: '10px',
                     }
               }
             >
@@ -595,13 +596,13 @@ const ModalJoin = ({ setValue, handleClose }) => {
           variant='contained'
           color='primary'
           sx={{
-            width: '18%',
-            borderRadius: '30px',
+            width: '24%',
+            borderRadius: '20px',
             margin: '1em 11.5em',
           }}
           onClick={joinButtonClickHandler}
         >
-          Next
+          Sing up
           {/* <NavigateNextIcon fontSize='medium' /> */}
         </Button>
       </form>

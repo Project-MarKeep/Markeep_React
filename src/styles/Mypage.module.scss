@@ -1,4 +1,4 @@
-@import "variables", "mixin";
+@import 'variables', 'mixin';
 
 .wrap {
   width: 80%;
@@ -47,12 +47,12 @@
           position: relative;
           font-size: 14px;
           margin-top: 0px;
-          width: 90%;
+          width: 20%;
           height: 35px;
           bottom: 3px;
           border: 2px solid $blue04;
           border-radius: 4px;
-          font-family: "Noto-l";
+          font-family: 'Noto-l';
           background: $black;
           margin-left: 16px;
           color: #fafafa;
@@ -68,10 +68,22 @@
           }
         }
 
-        .icon {
+        .cancel {
           position: absolute;
-          top: 5px;
-          right: 10%;
+          top: 3px;
+          right: 78%;
+
+          @include icon($size: 24px);
+
+          &:hover {
+            @include hover();
+          }
+        }
+
+        .search {
+          position: absolute;
+          top: 3px;
+          right: 75%;
 
           @include icon($size: 24px);
 
@@ -86,6 +98,9 @@
         font-size: 14px;
         gap: 8px;
         height: 30px;
+        position: relative;
+        right: 1%;
+
         .link {
           display: flex;
           align-items: center;
